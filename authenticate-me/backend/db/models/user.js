@@ -36,6 +36,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING.BINARY,
       allowNull: false,
       len: [60, 60]
+    },
+    firstName: {
+      type: DataTypes.STRING
+    },
+    lastName: {
+      type: DataTypes.STRING
     }
   }, {
     sequelize,
