@@ -1,6 +1,6 @@
 'use strict';
 let options = {};
-if (process.env.NODE_ENV = 'production') {
+if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
 options.tableName = 'Spots'
@@ -17,7 +17,7 @@ module.exports = {
      * }], {});
      *
     */
-    queryInterface.bulkInsert(options, [
+    await queryInterface.bulkInsert(options, [
       {
         ownerId: 1,
         address: '1495 View Point Lane',
@@ -27,7 +27,7 @@ module.exports = {
         lat: 35.96,
         lng: -83.92,
         name: 'Lavish Lake Getaway',
-        description: `There’s no better way to experience the beauty of Loudoun Lake than by sleeping right in the heart of it with breathtaking lake views.
+        description: `There is no better way to experience the beauty of Loudoun Lake than by sleeping right in the heart of it with breathtaking lake views.
         Everything about it seems to come from a fantasy novel.`,
         price: 384
       },
@@ -80,7 +80,7 @@ module.exports = {
      * await queryInterface.bulkDelete('People', null, {});
      */
     const Op = Sequelize.Op;
-    queryInterface.bulkDelete(options, {
+    await queryInterface.bulkDelete(options, {
       id: {
         [Op.in]: [1, 2, 3, 4]
       }
