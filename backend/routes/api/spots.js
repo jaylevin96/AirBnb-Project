@@ -64,8 +64,10 @@ router.get('/current', requireAuth, async (req, res) => {
 router.get('/:spotId', async (req, res) => {
     try {
         let spot = await Spot.findByPk(req.params.spotId, {
-            include: [SpotImage, { model: User, as: 'Owner' }],
-            raw: true
+            include: [{ model: SpotImage, attributes: { exclude: ['createdAt', 'updatedAt', 'spotId'] } }, {
+                model: User, as: 'Owner', attributes: ['id', 'firstName', 'lastName']
+
+            }]
         })
         if (!spot) {
             throw new Error;
@@ -78,8 +80,12 @@ router.get('/:spotId', async (req, res) => {
             where: { spotId: req.params.spotId },
             raw: true
         })
+        let numReviews = reviews.length;
+        let total = reviews.reduce((sum, review) => sum += review.stars, 0)
+        let avgStarRating = total / numReviews;
 
-
+        spot.dataValues.numReviews = numReviews;
+        spot.dataValues.avgStarRating = avgStarRating;
 
         res.json(spot)
     }
