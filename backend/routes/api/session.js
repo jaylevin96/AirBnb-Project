@@ -19,6 +19,7 @@ const validateLogin = [
 ];
 router.get('/', (req, res) => {
     const { user } = req;
+
     if (user) {
         const safeUser = {
             id: user.id,
@@ -59,9 +60,9 @@ router.post('/', validateLogin, async (req, res, next) => {
 
     }
 
-    setTokenCookie(res, safeUser);
+    let token = setTokenCookie(res, safeUser);
     return res.json({
-        user: safeUser
+        user: { ...safeUser, token }
     })
 })
 

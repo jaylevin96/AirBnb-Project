@@ -29,7 +29,7 @@ router.post('/', validateSignup, async (req, res) => {
     const hashedPassword = bcrypt.hashSync(password);
     const user = await User.create({ firstName, lastName, email, password, username, hashedPassword })
 
-    const safeUser = {
+    let safeUser = {
         id: user.id,
         firstName: user.firstName,
         lastName: user.lastName,
@@ -37,6 +37,7 @@ router.post('/', validateSignup, async (req, res) => {
         username: user.username
     }
     setTokenCookie(res, safeUser);
+
     return res.json({
         user: safeUser
     })
