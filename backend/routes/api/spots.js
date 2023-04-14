@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router();
 const { Spot, Review, SpotImage, User } = require('../../db/models')
 const { requireAuth } = require('../../utils/auth')
+const { handleValidationErrors } = require('../../utils/validation')
 
 
 router.get('/', async (req, res) => {
@@ -94,6 +95,13 @@ router.get('/:spotId', async (req, res) => {
         res.json({ message: "Spot couldn't be found" })
 
     }
+
+})
+
+router.post('/', requireAuth, handleValidationErrors, async (req, res) => {
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    let spot = await Spot.create({ address, city, state, country, lat, lng, name, description, price })
+    res.json(spot);
 
 })
 
