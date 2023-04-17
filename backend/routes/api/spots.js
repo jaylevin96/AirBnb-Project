@@ -219,4 +219,26 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     }
 
 })
+
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
+    let spot = await Spot.findByPk(req.params.spotId);
+    if (!spot) {
+        res.status(404);
+        return res.json({ message: "Spot couldn't be found" });
+    }
+    let { user } = req;
+    user = user.dataValues;
+    let userId = user.id
+    let Bookings;
+
+    if (userId === spot.dataValues.ownerId) {
+        Bookings = await spot.getBookings({ include: { model: User.scope('basic') } });
+    }
+    else {
+        Bookings = await spot.getBookings({ attributes: ['spotId', 'startDate', 'endDate'] })
+    }
+
+    res.json({ Bookings });
+
+})
 module.exports = router;
