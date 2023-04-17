@@ -33,7 +33,27 @@ router.get('/current', requireAuth, async (req, res) => {
     res.json({ Reviews });
 })
 
+router.post('/:reviewId/images', requireAuth, async (req, res) => {
 
+    let { user } = req;
+    let { url } = req.body;
+    user = user.dataValues;
+    let review = await Review.findByPk(req.params.reviewId);
+    console.log(review.dataValues.userId, user.id);
+    if (review.dataValues.userId !== user.id || !review) {
+        res.status(404);
+        return res.json({ message: "Review couldn't be found" })
+    }
+    // let count = await review.getReviewImages({ raw: true });
+    let count = await ReviewImage.count({ where: { reviewId: req.params.reviewId } })
+    if (count > 10) {
+        res.status(403);
+        return res.json({ message: "Maximum number of images for this resource was reached" })
+    }
+    let newImage = await review.createReviewImage({ url });
+    res.json({ id: newImage.id, url: newImage.url });
+
+})
 
 
 module.exports = router;
