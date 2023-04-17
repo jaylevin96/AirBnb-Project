@@ -195,4 +195,17 @@ router.get('/:spotId/reviews', async (req, res) => {
     }
 })
 
+router.post('/:spotId/reviews', requireAuth, async (req, res) => {
+    let spot = await Spot.findByPk(req.params.spotId);
+    const { review, stars } = req.body;
+    if (!spot) {
+        res.status(404);
+        res.json({ message: "Spot couldn't be found" })
+    }
+    else {
+        let newReview = await spot.createReview({ review, stars });
+        res.json(newReview);
+    }
+
+})
 module.exports = router;
