@@ -198,6 +198,10 @@ router.get('/:spotId/reviews', async (req, res) => {
 
 router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     let spot = await Spot.findByPk(req.params.spotId);
+    if (!spot) {
+        res.status(404);
+        res.json({ message: "Spot couldn't be found" })
+    }
     const { review, stars } = req.body;
     let { user } = req;
     user = user.dataValues;
@@ -207,10 +211,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
         res.status(403);
         return res.json({ message: "User already has a review for this spot" })
     }
-    if (!spot) {
-        res.status(404);
-        res.json({ message: "Spot couldn't be found" })
-    }
+
 
     else {
         let newReview = await spot.createReview({ review, stars, userId });
