@@ -57,12 +57,17 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
 
 router.put('/:reviewId', requireAuth, async (req, res) => {
     let { user } = req;
+    const { review, stars } = req.body;
     user = user.dataValues;
-    let review = await Review.findByPk(req.params.reviewId);
-    if (review.dataValues.userId !== user.id || !review) {
+    let reviewRecord = await Review.findByPk(req.params.reviewId);
+    if (!reviewRecord || reviewRecord.dataValues.userId !== user.id) {
         res.status(404);
         return res.json({ message: "Review couldn't be found" })
     }
+    reviewRecord.review = review;
+    reviewRecord.stars = stars;
+    await reviewRecord.save();
+    res.json(reviewRecord);
 })
 
 
