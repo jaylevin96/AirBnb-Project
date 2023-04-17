@@ -39,8 +39,8 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
     let { url } = req.body;
     user = user.dataValues;
     let review = await Review.findByPk(req.params.reviewId);
-    console.log(review.dataValues.userId, user.id);
-    if (review.dataValues.userId !== user.id || !review) {
+
+    if (!review || review.dataValues.userId !== user.id) {
         res.status(404);
         return res.json({ message: "Review couldn't be found" })
     }
@@ -53,6 +53,16 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
     let newImage = await review.createReviewImage({ url });
     res.json({ id: newImage.id, url: newImage.url });
 
+})
+
+router.put('/:reviewId', requireAuth, async (req, res) => {
+    let { user } = req;
+    user = user.dataValues;
+    let review = await Review.findByPk(req.params.reviewId);
+    if (review.dataValues.userId !== user.id || !review) {
+        res.status(404);
+        return res.json({ message: "Review couldn't be found" })
+    }
 })
 
 
