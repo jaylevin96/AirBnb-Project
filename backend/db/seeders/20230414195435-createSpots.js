@@ -51,7 +51,7 @@ module.exports = {
         country: 'United States',
         lat: 38.14,
         lng: -92.81,
-        name: 'Ozarks Lakefront Family & Pet Friendly Boho Retreat!',
+        name: 'Ozarks Lakefront Family & Pet Friendly',
         description: `Perfect for large/multiple families, or group of friends or even just a couple's getaway - have an adventure as big as Lake of the Ozarks when you stay at this stunning 4 bed/3 bath lakefront home with 2 large decks and a private dock. So much FUNN for kids and adults!!`,
         price: 409
       },
