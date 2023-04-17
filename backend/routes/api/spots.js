@@ -25,7 +25,10 @@ router.get('/', async (req, res) => {
                 preview: true
             }
         })
-        spot.previewImage = imagePreview.url
+        if (imagePreview) {
+            spot.previewImage = imagePreview.url
+
+        }
 
     }
     res.json(spots);
@@ -100,7 +103,9 @@ router.get('/:spotId', async (req, res) => {
 
 router.post('/', requireAuth, handleValidationErrors, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
-    let spot = await Spot.create({ address, city, state, country, lat, lng, name, description, price })
+    let { user } = req;
+    user = user.dataValues.id;
+    let spot = await Spot.create({ address, city, state, country, lat, lng, name, description, price, ownerId: user })
     res.json(spot);
 
 })
