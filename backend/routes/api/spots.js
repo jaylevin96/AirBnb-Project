@@ -60,7 +60,10 @@ router.get('/current', requireAuth, async (req, res) => {
                 preview: true
             }
         })
-        spot.previewImage = imagePreview.url
+        if (imagePreview) {
+
+            spot.previewImage = imagePreview.url
+        }
     }
     res.json(spots)
 })
@@ -101,12 +104,63 @@ router.get('/:spotId', async (req, res) => {
 
 })
 
-router.post('/', requireAuth, handleValidationErrors, async (req, res) => {
+router.post('/', requireAuth, async (req, res) => {
     const { address, city, state, country, lat, lng, name, description, price } = req.body;
     let { user } = req;
     user = user.dataValues.id;
     let spot = await Spot.create({ address, city, state, country, lat, lng, name, description, price, ownerId: user })
     res.json(spot);
+
+})
+router.post('/:spotId/images', requireAuth, async (req, res) => {
+    try {
+        let spot = await Spot.findByPk(req.params.spotId);
+        const { url, preview } = req.body;
+        let { user } = req;
+        user = user.dataValues;
+        if (!spot || spot.ownerId !== user.id) {
+            throw new Error("Spot couldn't be found")
+        }
+
+        //uncomment below if we want specific error for different owner
+        // if (spot.ownerId !== user.id) {
+        //     throw new Error("Spot must belong to the current user.")
+        // }
+
+        let newImage = await spot.createSpotImage({ url, preview })
+        res.json({ id: newImage.id, url: newImage.url, preview: newImage.preview })
+    }
+    catch (e) {
+        res.status(404);
+        res.json({ message: e.message })
+    }
+})
+
+router.put('/:spotId', requireAuth, async (req, res) => {
+
+    let spot = await Spot.findByPk(req.params.spotId);
+    const { address, city, state, country, lat, lng, name, description, price } = req.body;
+    let { user } = req;
+    user = user.dataValues;
+    if (!spot || spot.ownerId !== user.id) {
+        // throw new Error("Spot couldn't be found")
+        res.status(404);
+        res.json({ message: "Spot couldn't be found" })
+    }
+    else {
+        spot.address = address;
+        spot.city = city;
+        spot.state = state;
+        spot.country = country;
+        spot.lat = lat;
+        spot.lng = lng;
+        spot.name = name;
+        spot.description = description;
+        spot.price = price;
+        await spot.save();
+        res.json(spot)
+
+    }
 
 })
 
