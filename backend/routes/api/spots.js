@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router();
-const { Spot, Review, SpotImage, User } = require('../../db/models')
+const { Spot, Review, ReviewImage, SpotImage, User } = require('../../db/models')
 const { requireAuth } = require('../../utils/auth')
-const { handleValidationErrors } = require('../../utils/validation')
+
 
 
 router.get('/', async (req, res) => {
@@ -175,6 +175,23 @@ router.delete('/:spotId', async (req, res) => {
     else {
         await spot.destroy();
         res.json({ message: "Successfully deleted" })
+    }
+})
+
+router.get('/:spotId/reviews', async (req, res) => {
+    let spot = await Spot.findByPk(req.params.spotId);
+    if (!spot) {
+        res.status(404);
+        res.json({ message: "Spot couldn't be found" })
+    }
+    else {
+        let Reviews = await Review.findAll({
+            where: {
+                spotId: req.params.spotId
+            },
+            include: [User.scope('basic'), ReviewImage]
+        })
+        res.json({ Reviews })
     }
 })
 

@@ -64,6 +64,20 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Spot',
+    /* scopes: {
+      includePreview() {
+        const { SpotImage } = require('../models')
+        return {
+          // attributes: ['id','ownerId','address','city','state','country','']
+          include: {
+            model: SpotImage, where: {
+
+              preview: true
+            }
+          }
+        }
+      }
+    } */
   });
   return Spot;
 };
