@@ -20,46 +20,88 @@ module.exports = (sequelize, DataTypes) => {
     ownerId: DataTypes.INTEGER,
     address: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notNull: {
+          // args: true,
+          msg: "Street address is required"
+        }
+      }
     },
     city: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "City is required"
+        }
+      }
     },
     state: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "State is required"
+        }
+      }
     },
     country: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Country is required"
+        }
+      }
     },
     lat: {
       type: DataTypes.DECIMAL,
+      allowNull: false,
       validate: {
-        isFloat: true
+        notNull: {
+          msg: "Latitude is not valid"
+        },
+        isFloat: { msg: "Latitude is not valid" }
       }
     },
     lng: {
       type: DataTypes.DECIMAL,
+      allowNull: false,
       validate: {
-        isFloat: true
+        notNull: {
+          msg: "Longitude is not valid"
+        },
+        isFloat: { msg: "Longitude is not valid" }
       }
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [1, 49]
+        len: {
+          args: [1, 49],
+          msg: "Name must be less than 50 characters"
+        }
       }
     },
     description: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Description is required"
+        }
+      }
     },
     price: {
       type: DataTypes.DECIMAL,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Price per day is required"
+        }
+      }
     }
   }, {
     sequelize,
