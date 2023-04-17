@@ -204,6 +204,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     }
     else {
         let newReview = await spot.createReview({ review, stars });
+        res.status(201);
         res.json(newReview);
     }
 
