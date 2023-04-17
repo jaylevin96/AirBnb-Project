@@ -109,6 +109,7 @@ router.post('/', requireAuth, async (req, res) => {
     let { user } = req;
     user = user.dataValues.id;
     let spot = await Spot.create({ address, city, state, country, lat, lng, name, description, price, ownerId: user })
+    res.status(201);
     res.json(spot);
 
 })
@@ -198,12 +199,21 @@ router.get('/:spotId/reviews', async (req, res) => {
 router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     let spot = await Spot.findByPk(req.params.spotId);
     const { review, stars } = req.body;
+    let { user } = req;
+    user = user.dataValues;
+    let userId = user.id
+    let reviews = await spot.getReviews({ where: { userId } })
+    if (reviews.length) {
+        res.status(403);
+        return res.json({ message: "User already has a review for this spot" })
+    }
     if (!spot) {
         res.status(404);
         res.json({ message: "Spot couldn't be found" })
     }
+
     else {
-        let newReview = await spot.createReview({ review, stars });
+        let newReview = await spot.createReview({ review, stars, userId });
         res.status(201);
         res.json(newReview);
     }
