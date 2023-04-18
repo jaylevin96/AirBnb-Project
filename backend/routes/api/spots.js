@@ -270,7 +270,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
             }
         }
     });
-    console.log(allBookingsBefore);
     if (allBookingsBefore.length) {
         errors.startDate = "Start date conflicts with an existing booking"
         conflict = true;
@@ -285,7 +284,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
             }
         }
     })
-    console.log(allBookingsAfter, allBookingsBefore);
+
     if (allBookingsAfter.length) {
         errors.endDate = "End date conflicts with an existing booking"
         conflict = true
