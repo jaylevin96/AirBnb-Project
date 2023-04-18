@@ -16,14 +16,16 @@ router.get('/current', requireAuth, async (req, res) => {
             }
         }
     })
+    let images = await SpotImage.findAll({ where: { preview: true }, raw: true })
     for (let booking of Bookings) {
         let spot = booking.dataValues.Spot.dataValues;
-        let imagePreview = await SpotImage.findOne({
-            where: {
-                spotId: spot.id,
-                preview: true
-            }
-        });
+        let imagePreview = images.filter(image => image.spotId === spot.id)[0]
+        // let imagePreview = await SpotImage.findOne({
+        //     where: {
+        //         spotId: spot.id,
+        //         preview: true
+        //     }
+        // });
         if (imagePreview) {
             spot.previewImage = imagePreview.url
         }
