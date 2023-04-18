@@ -244,13 +244,65 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 })
 router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     let spot = await Spot.findByPk(req.params.spotId);
+    let spotId = spot.dataValues.id;
+    let { user } = req;
+    user = user.dataValues;
+    let userId = user.id
+    const { startDate: startString, endDate: endString } = req.body;
+    let startDate = new Date(startString);
+    let endDate = new Date(endString);
     if (!spot) {
         res.status(404);
         return res.json({ message: "Spot couldn't be found" });
     }
-    let { user } = req;
-    user = user.dataValues;
-    let userId = user.id
+    if (userId === spot.dataValues.ownerId) {
+        res.status(404);
+        return res.json({ message: "Can not create booking if user is the owner of the spot" })
+    }
+    const { Op } = require("sequelize");
+    let errors = {};
+    let conflict = false;
+    let allBookingsBefore = await spot.getBookings({
+        where: {
+            "endDate": {
+                [Op.gt]: startDate
+            },
+            "startDate": {
+                [Op.lt]: startDate
+            }
+        }
+    });
+    console.log(allBookingsBefore);
+    if (allBookingsBefore.length) {
+        errors.startDate = "Start date conflicts with an existing booking"
+        conflict = true;
+    }
+    let allBookingsAfter = await spot.getBookings({
+        where: {
+            "startDate": {
+                [Op.lt]: endDate
+            },
+            "endDate": {
+                [Op.gt]: endDate
+            }
+        }
+    })
+
+    if (allBookingsAfter.length) {
+        errors.endDate = "End date conflicts with an existing booking"
+        conflict = true
+    }
+    if (conflict) {
+        res.status(403)
+        return res.json({
+            message: "Sorry, this spot is already booked for the specific dates",
+            errors
+        })
+    }
+
+    let newBooking = await spot.createBooking({ userId, spotId, startDate, endDate })
+    res.json(newBooking);
+
 
 })
 module.exports = router;
