@@ -42,6 +42,10 @@ router.get('/current', requireAuth, async (req, res) => {
 router.put('/:bookingId', requireAuth, async (req, res) => {
 
     let booking = await Booking.findByPk(req.params.bookingId)
+    if (!booking) {
+        res.status(404);
+        return res.json({ message: "Booking couldn't be found" })
+    }
     let spot = await Spot.findByPk(booking.spotId);
     const { startDate, endDate } = req.body;
     let { user } = req;
@@ -49,7 +53,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     let todaysDate = new Date;
     let errors = {};
     let conflict = false;
-    if (!booking || booking.userId !== user.id) {
+    if (booking.userId !== user.id) {
         res.status(404);
         return res.json({ message: "Booking couldn't be found" })
     }
@@ -110,15 +114,20 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
 
 router.delete("/:bookingId", requireAuth, async (req, res) => {
     let booking = await Booking.findByPk(req.params.bookingId)
+    if (!booking) {
+        res.status(404);
+        return res.json({ message: "Booking couldn't be found" })
+    }
+    let spot = await Spot.findByPk(booking.spotId)
     let { user } = req;
     user = user.toJSON()
     let todaysDate = new Date;
 
-    if (!booking || booking.userId !== user.id) {
+    if ((booking.userId !== user.id && spot.ownerId !== user.id)) {
         res.status(404);
         return res.json({ message: "Booking couldn't be found" })
     }
-    if (booking.startDate > todaysDate) {
+    if (booking.startDate < todaysDate) {
         res.status(403)
         return res.json({ message: "Bookings that have been started can't be deleted" })
     }
