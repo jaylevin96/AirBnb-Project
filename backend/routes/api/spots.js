@@ -263,10 +263,10 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     let allBookingsBefore = await spot.getBookings({
         where: {
             "endDate": {
-                [Op.gt]: startDate
+                [Op.gte]: startDate
             },
             "startDate": {
-                [Op.lt]: startDate
+                [Op.lte]: startDate
             }
         }
     });
@@ -278,14 +278,14 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     let allBookingsAfter = await spot.getBookings({
         where: {
             "startDate": {
-                [Op.lt]: endDate
+                [Op.lte]: endDate
             },
             "endDate": {
-                [Op.gt]: endDate
+                [Op.gte]: endDate
             }
         }
     })
-
+    console.log(allBookingsAfter, allBookingsBefore);
     if (allBookingsAfter.length) {
         errors.endDate = "End date conflicts with an existing booking"
         conflict = true
