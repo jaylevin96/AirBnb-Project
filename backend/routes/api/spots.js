@@ -7,7 +7,32 @@ const { requireAuth } = require('../../utils/auth')
 
 router.get('/', async (req, res) => {
     let spots = await Spot.findAll({ raw: true });
-
+    let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
+    if (page) page = parseInt(page);
+    if (size) size = partseInt(size);
+    if (minLat) minLat = Number(minLat);
+    if (maxLat) maxLat = Number(maxLat);
+    if (minLng) minLng = Number(minLng);
+    if (maxLng) maxLng = Number(maxLng);
+    if (minPrice) minPrice = Number(minPrice);
+    if (maxPrice) maxPrice = Number(maxPrice);
+    if (!page) page = 1;
+    if (!size) size = 20;
+    // if (minPrice < 0) minPrice = 0;
+    // if (maxPrice < 0) maxPrice = 0;
+    let errors = {}
+    /* if (page < 1 || page > 10) errors.page = "Page must be greater than or equal to 1"
+    if (size < 1 || size > 20) errors.size = "Size must be greater than or equal to 1"
+    if (isNaN(maxLat)) errors.maxLat = "Maximum latitude is invalid"
+    if (isNaN(minLat)) errors.minLat = "Minimum latitude is invalid"
+    if (isNaN(maxLng)) errors.maxLng = "Maximum longitude is invalid"
+    if (isNaN(minLng)) errors.minLng = "Minimum longitude is invalid"
+    if (minPrice < 0) errors.minPrice = "Minimum price must be greater than or equal to 0"
+    if (maxPrice < 0) errors.maxPrice = "Maximum price must be greater than or equal to 0" */
+    if (Object.keys(errors).length) {
+        res.status(400);
+        return res.json({ message: "Bad request", errors })
+    }
     let reviews = await Review.findAll({
         attributes: {
             include: ['spotId', 'stars']
@@ -145,22 +170,24 @@ router.put('/:spotId', requireAuth, async (req, res) => {
     if (!spot || spot.ownerId !== user.id) {
         // throw new Error("Spot couldn't be found")
         res.status(404);
-        res.json({ message: "Spot couldn't be found" })
+        return res.json({ message: "Spot couldn't be found" })
     }
-    else {
-        spot.address = address;
-        spot.city = city;
-        spot.state = state;
-        spot.country = country;
-        spot.lat = lat;
-        spot.lng = lng;
-        spot.name = name;
-        spot.description = description;
-        spot.price = price;
-        await spot.save();
-        res.json(spot)
+    // else {
+    //     spot.address = address;
+    //     spot.city = city;
+    //     spot.state = state;
+    //     spot.country = country;
+    //     spot.lat = lat;
+    //     spot.lng = lng;
+    //     spot.name = name;
+    //     spot.description = description;
+    //     spot.price = price;
+    //     await spot.save();
+    //     res.json(spot)
 
-    }
+    // }
+    spot.update(req.body);
+    res.json(spot);
 
 })
 router.delete('/:spotId', async (req, res) => {
