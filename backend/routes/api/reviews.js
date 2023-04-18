@@ -5,7 +5,7 @@ const { requireAuth } = require('../../utils/auth')
 
 router.get('/current', requireAuth, async (req, res) => {
     let { user } = req;
-    user = user.dataValues;
+    user = user.toJSON();
 
     let Reviews = await Review.findAll({
         where: {
@@ -13,12 +13,14 @@ router.get('/current', requireAuth, async (req, res) => {
         },
         include: [{ model: User, attributes: ['id', 'firstName', 'lastName'] },
         { model: Spot, attributes: { exclude: ['description', 'createdAt', 'updatedAt'] } },
-            ReviewImage]
+            ReviewImage],
+        raw: true,
+        nest: true
     })
 
 
     for (let review of Reviews) {
-        let spot = review.dataValues.Spot.dataValues;
+        let spot = review.Spot;
         let imagePreview = await SpotImage.findOne({
             where: {
                 spotId: spot.id,
@@ -37,10 +39,11 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
 
     let { user } = req;
     let { url } = req.body;
-    user = user.dataValues;
+    user = user.toJSON();
     let review = await Review.findByPk(req.params.reviewId);
+    let reviewJSON = review.toJSON()
 
-    if (!review || review.dataValues.userId !== user.id) {
+    if (!review || reviewJSON.userId !== user.id) {
         res.status(404);
         return res.json({ message: "Review couldn't be found" })
     }
@@ -58,9 +61,10 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
 router.put('/:reviewId', requireAuth, async (req, res) => {
     let { user } = req;
     const { review, stars } = req.body;
-    user = user.dataValues;
+    user = user.toJSON();
     let reviewRecord = await Review.findByPk(req.params.reviewId);
-    if (!reviewRecord || reviewRecord.dataValues.userId !== user.id) {
+    let reviewUser = reviewRecord.toJSON().userId
+    if (!reviewRecord || reviewUser !== user.id) {
         res.status(404);
         return res.json({ message: "Review couldn't be found" })
     }
@@ -72,9 +76,10 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
 
 router.delete('/:reviewId', requireAuth, async (req, res) => {
     let { user } = req;
-    user = user.dataValues;
+    user = user.toJSON();
     let reviewRecord = await Review.findByPk(req.params.reviewId);
-    if (!reviewRecord || reviewRecord.dataValues.userId !== user.id) {
+    let reviewUser = reviewRecord.toJSON().userId
+    if (!reviewRecord || reviewUser !== user.id) {
         res.status(404);
         return res.json({ message: "Review couldn't be found" })
     }

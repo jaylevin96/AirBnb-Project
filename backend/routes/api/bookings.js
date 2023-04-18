@@ -6,19 +6,23 @@ const { Op } = require("sequelize");
 
 router.get('/current', requireAuth, async (req, res) => {
     let { user } = req;
-    user = user.dataValues;
+    user = user.toJSON();
     let Bookings = await Booking.findAll({
         where: { userId: user.id },
         include: {
             model: Spot,
             attributes: {
                 exclude: ['description', 'createdAt', 'updatedAt']
-            }
-        }
+            },
+
+        },
+        raw: true,
+        nest: true
     })
     let images = await SpotImage.findAll({ where: { preview: true }, raw: true })
     for (let booking of Bookings) {
-        let spot = booking.dataValues.Spot.dataValues;
+        // let spot = booking.dataValues.Spot.dataValues;
+        let spot = booking.Spot;
         let imagePreview = images.filter(image => image.spotId === spot.id)[0]
         // let imagePreview = await SpotImage.findOne({
         //     where: {
