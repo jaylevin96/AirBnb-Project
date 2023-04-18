@@ -102,4 +102,23 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
 
 })
 
+router.delete("/:bookingId", requireAuth, async (req, res) => {
+    let booking = await Booking.findByPk(req.params.bookingId)
+    let { user } = req;
+    user = user.toJSON()
+    let todaysDate = new Date;
+
+    if (!booking || booking.userId !== user.id) {
+        res.status(404);
+        return res.json({ message: "Booking couldn't be found" })
+    }
+    if (booking.startDate > todaysDate) {
+        res.status(403)
+        return res.json({ message: "Bookings that have been started can't be deleted" })
+    }
+
+    await booking.destroy();
+    return res.json({ message: "successfully deleted" })
+})
+
 module.exports = router;
