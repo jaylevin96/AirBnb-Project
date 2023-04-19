@@ -24,6 +24,7 @@ router.get('/current', requireAuth, async (req, res) => {
         // let spot = booking.dataValues.Spot.dataValues;
         let spot = booking.Spot;
         let imagePreview = images.filter(image => image.spotId === spot.id)[0]
+        spot.previewImage = null;
         // let imagePreview = await SpotImage.findOne({
         //     where: {
         //         spotId: spot.id,

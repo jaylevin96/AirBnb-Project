@@ -81,6 +81,7 @@ router.get('/', async (req, res) => {
         let total = spotReviews.reduce((sum, review) => sum += review.stars, 0)
         spot.avgRating = total / spotReviews.length;
         let imagePreview = images.filter(image => image.spotId === spot.id)[0]
+        spot.previewImage = null;
         // let imagePreview = await SpotImage.findOne({
         //     where: {
         //         spotId: spot.id,
@@ -99,7 +100,7 @@ router.get('/', async (req, res) => {
 router.get('/current', requireAuth, async (req, res) => {
     let { user } = req;
     // user = user.toJSON();
-    let spots = await Spot.findAll({
+    let Spots = await Spot.findAll({
         where: {
             ownerId: user.id
         },
@@ -114,18 +115,19 @@ router.get('/current', requireAuth, async (req, res) => {
 
     let images = await SpotImage.findAll({ where: { preview: true }, raw: true })
     // console.log(images);
-    for (let spot of spots) {
+    for (let spot of Spots) {
         let spotReviews = reviews.filter(review => review.spotId === spot.id);
         let total = spotReviews.reduce((sum, review) => sum += review.stars, 0)
         spot.avgRating = total / spotReviews.length;
         let imagePreview = images.filter(image => image.spotId === spot.id)[0]
+        spot.previewImage = null;
 
         if (imagePreview) {
 
             spot.previewImage = imagePreview.url
         }
     }
-    res.json(spots)
+    res.json({ Spots })
 })
 
 router.get('/:spotId', async (req, res) => {

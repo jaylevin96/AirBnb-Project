@@ -40,10 +40,22 @@ module.exports = (sequelize, DataTypes) => {
       len: [60, 60]
     },
     firstName: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "First Name is required"
+        }
+      }
     },
     lastName: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: "Last Name is required"
+        }
+      }
     }
   }, {
     sequelize,

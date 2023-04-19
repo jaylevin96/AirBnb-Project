@@ -27,6 +27,7 @@ router.get('/current', requireAuth, async (req, res) => {
                 preview: true
             }
         });
+        spot.previewImage = null;
         if (imagePreview) {
             spot.previewImage = imagePreview.url
 
@@ -68,8 +69,14 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
         res.status(404);
         return res.json({ message: "Review couldn't be found" })
     }
-    reviewRecord.review = review;
-    reviewRecord.stars = stars;
+    if (review) {
+
+        reviewRecord.review = review;
+    }
+    if (stars) {
+
+        reviewRecord.stars = stars;
+    }
     await reviewRecord.save();
     res.json(reviewRecord);
 })
