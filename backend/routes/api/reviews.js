@@ -5,7 +5,7 @@ const { requireAuth } = require('../../utils/auth')
 
 router.get('/current', requireAuth, async (req, res) => {
     let { user } = req;
-    user = user.toJSON();
+    // user = user.toJSON();
 
     let Reviews = await Review.findAll({
         where: {
@@ -39,11 +39,11 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
 
     let { user } = req;
     let { url } = req.body;
-    user = user.toJSON();
+    // user = user.toJSON();
     let review = await Review.findByPk(req.params.reviewId);
-    let reviewJSON = review.toJSON()
+    // let reviewJSON = review.toJSON()
 
-    if (!review || reviewJSON.userId !== user.id) {
+    if (!review || review.userId !== user.id) {
         res.status(404);
         return res.json({ message: "Review couldn't be found" })
     }
@@ -61,10 +61,10 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
 router.put('/:reviewId', requireAuth, async (req, res) => {
     let { user } = req;
     const { review, stars } = req.body;
-    user = user.toJSON();
+    // user = user.toJSON();
     let reviewRecord = await Review.findByPk(req.params.reviewId);
-    let reviewUser = reviewRecord.toJSON().userId
-    if (!reviewRecord || reviewUser !== user.id) {
+    // let reviewUser = reviewRecord.toJSON().userId
+    if (!reviewRecord || reviewRecord.userId !== user.id) {
         res.status(404);
         return res.json({ message: "Review couldn't be found" })
     }
@@ -76,10 +76,10 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
 
 router.delete('/:reviewId', requireAuth, async (req, res) => {
     let { user } = req;
-    user = user.toJSON();
+    // user = user.toJSON();
     let reviewRecord = await Review.findByPk(req.params.reviewId);
-    let reviewUser = reviewRecord.toJSON().userId
-    if (!reviewRecord || reviewUser !== user.id) {
+    // let reviewUser = reviewRecord.toJSON().userId
+    if (!reviewRecord || reviewRecord.userId !== user.id) {
         res.status(404);
         return res.json({ message: "Review couldn't be found" })
     }

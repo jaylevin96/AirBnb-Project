@@ -98,7 +98,7 @@ router.get('/', async (req, res) => {
 
 router.get('/current', requireAuth, async (req, res) => {
     let { user } = req;
-    user = user.toJSON();
+    // user = user.toJSON();
     let spots = await Spot.findAll({
         where: {
             ownerId: user.id

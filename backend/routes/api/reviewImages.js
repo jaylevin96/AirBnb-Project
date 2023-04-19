@@ -12,7 +12,7 @@ router.delete('/:imageId', requireAuth, async (req, res) => {
     }
     let review = await Review.findByPk(image.reviewId);
     let { user } = req;
-    user = user.toJSON()
+    // user = user.toJSON()
     if (review.userId !== user.id) {
         res.status(404);
         return res.json({ message: "Review Image couldn't be found" })

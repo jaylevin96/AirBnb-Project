@@ -6,7 +6,7 @@ const { Op } = require("sequelize");
 
 router.get('/current', requireAuth, async (req, res) => {
     let { user } = req;
-    user = user.toJSON();
+    // user = user.toJSON();
     let Bookings = await Booking.findAll({
         where: { userId: user.id },
         include: {
@@ -49,7 +49,7 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     let spot = await Spot.findByPk(booking.spotId);
     const { startDate, endDate } = req.body;
     let { user } = req;
-    user = user.toJSON()
+    // user = user.toJSON()
     let todaysDate = new Date;
     let errors = {};
     let conflict = false;
@@ -120,7 +120,7 @@ router.delete("/:bookingId", requireAuth, async (req, res) => {
     }
     let spot = await Spot.findByPk(booking.spotId)
     let { user } = req;
-    user = user.toJSON()
+    // user = user.toJSON()
     let todaysDate = new Date;
 
     if ((booking.userId !== user.id && spot.ownerId !== user.id)) {
