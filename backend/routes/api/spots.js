@@ -271,7 +271,7 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
     let userId = user.id
     let reviews = await spot.getReviews({ where: { userId } })
     if (reviews.length) {
-        res.status(403);
+        res.status(500);
         return res.json({ message: "User already has a review for this spot" })
     }
 
@@ -286,11 +286,11 @@ router.post('/:spotId/reviews', requireAuth, async (req, res) => {
 
 router.get('/:spotId/bookings', requireAuth, async (req, res) => {
     let spot = await Spot.findByPk(req.params.spotId);
-    let spotJson = spot.toJSON()
     if (!spot) {
         res.status(404);
         return res.json({ message: "Spot couldn't be found" });
     }
+    let spotJson = spot.toJSON()
     let { user } = req;
     // user = user.toJSON();
     let userId = user.id
@@ -308,6 +308,10 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
 })
 router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     let spot = await Spot.findByPk(req.params.spotId);
+    if (!spot) {
+        res.status(404);
+        return res.json({ message: "Spot couldn't be found" });
+    }
     let spotId = spot.id;
     let { user } = req;
     // user = user.toJSON();
@@ -315,10 +319,6 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     const { startDate: startString, endDate: endString } = req.body;
     let startDate = new Date(startString);
     let endDate = new Date(endString);
-    if (!spot) {
-        res.status(404);
-        return res.json({ message: "Spot couldn't be found" });
-    }
     if (userId === spot.toJSON().ownerId) {
         res.status(404);
         return res.json({ message: "Can not create booking if user is the owner of the spot" })

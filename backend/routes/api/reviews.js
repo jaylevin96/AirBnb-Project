@@ -20,7 +20,8 @@ router.get('/current', requireAuth, async (req, res) => {
 
 
     for (let review of Reviews) {
-        let spot = review.Spot;
+        // review = review.toJSON()
+        let spot = review.Spot.dataValues
         let imagePreview = await SpotImage.findOne({
             where: {
                 spotId: spot.id,
