@@ -304,8 +304,8 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
     }
 
     for (let booking of Bookings) {
-        booking.dataValues.startDate = booking.startDate.toISOString().slice(0, 10)
-        booking.dataValues.endDate = booking.endDate.toISOString().slice(0, 10)
+        // booking.dataValues.startDate = booking.startDate.toISOString().slice(0, 10)
+        // booking.dataValues.endDate = booking.endDate.toISOString().slice(0, 10)
     }
 
     res.json({ Bookings });
@@ -369,8 +369,8 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
     }
 
     let newBooking = await spot.createBooking({ userId, spotId, startDate, endDate })
-    newBooking.dataValues.startDate = newBooking.startDate.toISOString().slice(0, 10)
-    newBooking.dataValues.endDate = newBooking.endDate.toISOString().slice(0, 10)
+    // newBooking.dataValues.startDate = newBooking.startDate.toISOString().slice(0, 10)
+    // newBooking.dataValues.endDate = newBooking.endDate.toISOString().slice(0, 10)
     res.json(newBooking);
 
 

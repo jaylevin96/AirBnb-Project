@@ -114,8 +114,8 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     booking.startDate = new Date(startDate);
     booking.endDate = new Date(endDate);
     await booking.save();
-    booking.dataValues.startDate = booking.startDate.toISOString().slice(0, 10)
-    booking.dataValues.endDate = booking.endDate.toISOString().slice(0, 10)
+    // booking.dataValues.startDate = booking.startDate.toISOString().slice(0, 10)
+    // booking.dataValues.endDate = booking.endDate.toISOString().slice(0, 10)
     res.json(booking);
 
 })
