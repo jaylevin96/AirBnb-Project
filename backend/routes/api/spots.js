@@ -10,10 +10,10 @@ router.get('/', async (req, res) => {
     let { page, size, minLat, maxLat, minLng, maxLng, minPrice, maxPrice } = req.query;
     let where = {}
     if (page) page = parseInt(page);
-    if (!page) page = 1;
+    if (page === 0 || page === undefined) page = 1;
 
     if (size) size = parseInt(size);
-    if (!size) size = 20;
+    if (size === 0 || size === undefined) size = 20;
 
     if (minLat !== undefined) {
         minLat = Number(minLat)
@@ -53,12 +53,12 @@ router.get('/', async (req, res) => {
     let limit = size;
     let offset = size * (page - 1)
 
-    let Spots = await Spot.findAll({ where, limit, offset, raw: true });
+
     // if (minPrice < 0) minPrice = 0;
     // if (maxPrice < 0) maxPrice = 0;
     let errors = {}
-    if (page < 1 || page > 10) errors.page = "Page must be greater than or equal to 1"
-    if (size < 1 || size > 20) errors.size = "Size must be greater than or equal to 1"
+    if (page < 1 || page > 10 || !page) errors.page = "Page must be greater than or equal to 1"
+    if (size < 1 || size > 20 || !size) errors.size = "Size must be greater than or equal to 1"
     if (isNaN(maxLat) && maxLat !== undefined) errors.maxLat = "Maximum latitude is invalid"
     if (isNaN(minLat) && minLat !== undefined) errors.minLat = "Minimum latitude is invalid"
     if (isNaN(maxLng) && maxLng !== undefined) errors.maxLng = "Maximum longitude is invalid"
@@ -69,6 +69,7 @@ router.get('/', async (req, res) => {
         res.status(400);
         return res.json({ message: "Bad request", errors })
     }
+    let Spots = await Spot.findAll({ where, limit, offset, raw: true });
     let reviews = await Review.findAll({
         attributes: {
             include: ['spotId', 'stars']
