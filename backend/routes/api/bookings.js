@@ -21,6 +21,9 @@ router.get('/current', requireAuth, async (req, res) => {
     })
     let images = await SpotImage.findAll({ where: { preview: true }, raw: true })
     for (let booking of Bookings) {
+
+        booking.startDate = booking.startDate.slice(0, 10)
+        booking.endDate = booking.endDate.slice(0, 10)
         // let spot = booking.dataValues.Spot.dataValues;
         let spot = booking.Spot;
         let imagePreview = images.filter(image => image.spotId === spot.id)[0]
@@ -109,6 +112,8 @@ router.put('/:bookingId', requireAuth, async (req, res) => {
     booking.startDate = new Date(startDate);
     booking.endDate = new Date(endDate);
     await booking.save();
+    booking.dataValues.startDate = booking.startDate.toISOString().slice(0, 10)
+    booking.dataValues.endDate = booking.endDate.toISOString().slice(0, 10)
     res.json(booking);
 
 })
