@@ -15,38 +15,38 @@ router.get('/', async (req, res) => {
     if (size) size = parseInt(size);
     if (!size) size = 20;
 
-    if (minLat) {
+    if (minLat !== undefined) {
         minLat = Number(minLat)
         where.lat = { [Op.gte]: minLat };
     };
-    if (maxLat) {
+    if (maxLat !== undefined) {
         maxLat = Number(maxLat)
         where.lat = { [Op.lte]: maxLat }
     };
-    if (minLat && maxLat) {
+    if (minLat !== undefined && maxLat !== undefined) {
         where.lat = { [Op.between]: [minLat, maxLat] }
     };
 
-    if (minLng) {
+    if (minLng !== undefined) {
         minLng = Number(minLng)
         where.lng = { [Op.gte]: minLng }
     };
-    if (maxLng) {
+    if (maxLng !== undefined) {
         maxLng = Number(maxLng)
         where.lng = { [Op.lte]: maxLng }
     };
-    if (minLng && maxLng) {
+    if (minLng !== undefined && maxLng !== undefined) {
         where.lng = { [Op.between]: [minLng, maxLng] }
     }
-    if (minPrice) {
+    if (minPrice !== undefined) {
         minPrice = Number(minPrice)
         where.price = { [Op.gte]: minPrice };
     };
-    if (maxPrice) {
+    if (maxPrice !== undefined) {
         maxPrice = Number(maxPrice)
         where.price = { [Op.lte]: maxPrice };
     };
-    if (minPrice && maxPrice) {
+    if ((minPrice !== undefined) && (maxPrice !== undefined)) {
         where.price = { [Op.between]: [minPrice, maxPrice] }
     }
 
