@@ -34,3 +34,14 @@
 .hidden {
   display: none;
 }
+#logo {
+  width: 40px;
+  height: auto;
+  background-color: white;
+  display: inline-block;
+}
+#logo-text {
+  display: flex;
+  align-items: center;
+  column-gap: 1em;
+}
