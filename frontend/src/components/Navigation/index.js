@@ -13,7 +13,7 @@ export default function Navigation({ isLoaded }) {
                 <NavLink exact to="/">Home</NavLink>
             </li>
             {isLoaded && (
-                <li>
+                <li id="profile-menu">
                     <ProfileButton user={sessionUser} />
                 </li>
             )}
