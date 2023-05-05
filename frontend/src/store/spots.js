@@ -15,8 +15,9 @@ export function loadSpots(data) {
 export const getAllSpots = () => async dispatch => {
     const response = await csrfFetch('/api/spots')
     const data = await response.json()
-    console.log("DATA", data);
+
     dispatch(loadSpots(data))
+    return data;
 
 }
 
@@ -26,7 +27,7 @@ export default function spotsReducer(state = initialState, action) {
     let newState;
     switch (action.type) {
         case GETSPOTS:
-            console.log("DATA2", action.data);
+
             newState = Object.assign({}, state)
             let spots = action.data.Spots.forEach((spot) => {
                 newState[spot.id] = spot;
