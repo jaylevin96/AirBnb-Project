@@ -42,7 +42,7 @@ export default function LoginFormPage() {
                     ></input>
                 </label>
                 {errors.credential && <p>{errors.credential}</p>}
-                <button type="submit">Log In</button>
+                <button className="submit" type="submit">Log In</button>
             </form>
 
         </div>

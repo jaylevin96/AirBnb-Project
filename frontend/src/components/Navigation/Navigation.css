@@ -1,0 +1,16 @@
+.profile-dropdown {
+  background-color: aliceblue;
+}
+.navBar {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  list-style-type: none;
+}
+.navBar li {
+  list-style-type: none;
+}
+
+.hidden {
+  display: none;
+}

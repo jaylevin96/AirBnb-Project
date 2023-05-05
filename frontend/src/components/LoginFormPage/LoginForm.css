@@ -37,7 +37,7 @@ label {
   margin-left: 7em;
 }
 
-button {
+.submit {
   margin: 2em 0em;
   width: 100px;
   height: 20px;
