@@ -1,6 +1,11 @@
 .profile-dropdown {
   background-color: aliceblue;
 }
+
+.profile-dropdown li {
+  text-align: center;
+  cursor: pointer;
+}
 .navBar {
   display: flex;
   justify-content: space-around;
