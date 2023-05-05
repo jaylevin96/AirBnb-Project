@@ -24,11 +24,11 @@ export const postSession = (body) => async dispatch => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
     })
-    if (response.ok) {
-        const data = await response.json()
-        // console.log(data);
-        dispatch(setSession(data))
-    }
+
+    const data = await response.json()
+    // console.log(data);
+    dispatch(setSession(data))
+
 
 }
 

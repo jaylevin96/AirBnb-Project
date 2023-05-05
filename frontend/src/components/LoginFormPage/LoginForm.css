@@ -1,0 +1,30 @@
+form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  align-items: center;
+  width: 100%;
+}
+
+h1 {
+  text-align: center;
+}
+input {
+  margin-right: 7em;
+  align-self: flex-end;
+  width: 200px;
+  height: 20px;
+}
+
+label {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-left: 7em;
+}
+
+button {
+  margin-top: 2em;
+  width: 100px;
+  height: 20px;
+}
