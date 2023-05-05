@@ -10,7 +10,7 @@ export default function LoginFormPage() {
     const [credential, setCredential] = useState("")
     const [password, setPassword] = useState("")
     const [errors, setErrors] = useState({})
-
+    console.log("SESSION USER", sessionUser);
     if (sessionUser) return <Redirect to="/" />
 
     const onSubmit = (e) => {
@@ -24,7 +24,7 @@ export default function LoginFormPage() {
         )
     }
     return (
-        <>
+        <div id="container">
             <h1>Log In</h1>
             <form onSubmit={onSubmit}>
                 <label>Username or Email
@@ -45,6 +45,6 @@ export default function LoginFormPage() {
                 <button type="submit">Log In</button>
             </form>
 
-        </>
+        </div>
     )
 }

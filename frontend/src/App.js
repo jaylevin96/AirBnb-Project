@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom"
 import LoginFormPage from "./components/LoginFormPage";
+import SignupFormPage from "./components/SignupFormPage";
+import { useDispatch } from "react-redux";
+import * as sessionActions from "./store/session"
+import Navigation from './components/Navigation/index'
 
 function App() {
-  return (
-    <Switch>
-      <Route path="/login">
-        <LoginFormPage />
-      </Route>
+  const dispatch = useDispatch()
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect(() => {
+    dispatch(sessionActions.getSessionThunk()).then(() => setIsLoaded(true))
+  }, [dispatch])
 
-    </Switch>
+  return (
+    <>
+      <>
+        <Navigation isLoaded={isLoaded} />
+        {isLoaded && (
+          <Switch>
+            <Route path="/login">
+              <LoginFormPage />
+            </Route>
+            <Route path="/signup">
+              <SignupFormPage />
+            </Route>
+          </Switch>
+        )}
+      </>
+    </>
   );
 }
 
