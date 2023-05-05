@@ -22,9 +22,9 @@ router.use('/reviews', reviewsRouter)
 router.use('/bookings', bookingsRouter)
 router.use('/spot-images', spotImagesRouter)
 router.use('/review-images', reviewImagesRouter)
-router.post('/test', function (req, res) {
-    res.json({ requestBody: req.body });
-});
+// router.post('/test', function (req, res) {
+//     res.json({ requestBody: req.body });
+// });
 // router.get('/restore-user', (req, res) => {
 //     return res.json(req.user)
 // })
