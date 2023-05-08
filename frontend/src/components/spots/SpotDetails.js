@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getSpotDetailsThunk } from '../../store/spots';
 import SpotReviews from '../reviews/SpotReviews';
 import './spotDetails.css';
+import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
+import ReviewModal from '../reviews/ReviewModal';
 export default function SpotDetails() {
     const params = useParams();
     let { spotId } = params;
@@ -84,7 +86,11 @@ export default function SpotDetails() {
 
                 </span>
 
-                <button className={hiddenClassName}>Post your review</button>
+                <button className={hiddenClassName}>
+                    <OpenModalMenuItem itemText="Post your review"
+                        modalComponent={<ReviewModal />} />
+
+                </button>
 
             </div>
             <div className='reviews-container'>
