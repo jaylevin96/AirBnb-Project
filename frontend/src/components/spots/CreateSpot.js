@@ -1,8 +1,10 @@
+import React, { useHistory } from 'react'
+import { useDispatch } from 'react-redux'
 export default function CreateSpot() {
-
+    const dispatch = useDispatch();
     return (<>
         <h2>Create a New Spot</h2>
-        <h3>Where's your palce located?</h3>
+        <h3>Where's your place located?</h3>
         <p>Guests will only get your exact address once they booked a reservation.</p>
         <form>
             <label>
