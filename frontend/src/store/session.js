@@ -38,6 +38,15 @@ export const postSession = (body) => async dispatch => {
 
 
 }
+export const createUser = (body) => async dispatch => {
+    const response = await csrfFetch('/api/users', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+    })
+    const data = await response.json();
+    dispatch(setSession(data))
+}
 
 export const getSessionThunk = () => async dispatch => {
     const response = await csrfFetch('/api/session')

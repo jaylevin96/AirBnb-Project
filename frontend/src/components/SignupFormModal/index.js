@@ -16,11 +16,18 @@ function SignupFormModal() {
     const { closeModal } = useModal();
 
     const handleSubmit = (e) => {
+        console.log({
+            email,
+            username,
+            firstName,
+            lastName,
+            password,
+        });
         e.preventDefault();
         if (password === confirmPassword) {
             setErrors({});
             return dispatch(
-                sessionActions.postSession({
+                sessionActions.createUser({
                     email,
                     username,
                     firstName,
@@ -31,6 +38,7 @@ function SignupFormModal() {
                 .then(closeModal)
                 .catch(async (res) => {
                     const data = await res.json();
+                    console.log("GOT HERE", data);
                     if (data && data.errors) {
                         setErrors(data.errors);
                     }
