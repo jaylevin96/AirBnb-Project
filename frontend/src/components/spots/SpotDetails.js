@@ -8,13 +8,14 @@ export default function SpotDetails() {
     let { spotId } = params;
     spotId = Number(spotId)
     const dispatch = useDispatch();
+    let spot = useSelector((state) => state.spots.singleSpot)
+    // let spot = spots.singleSpot;
     useEffect(() => {
         dispatch(getSpotDetailsThunk(spotId))
     }, [dispatch, spotId])
-    let spots = Object.values(useSelector((state) => state.singleSpot))
-    let spot = spots.find((spot) => spot.id === spotId)
-
-    if (!spot) return (<></>)
+    // let spot = spots.find((spot) => spot.id === spotId)
+    console.log("SPOT", spot);
+    if (!Object.values(spot).length) return (<></>)
     // console.log("SPOT", spots);
     const { name, city, state, country, Owner: owner, price, avgStarRating, description, numReviews } = spot;
     let firstName, lastName;
@@ -38,7 +39,7 @@ export default function SpotDetails() {
                 <img src={preview.url} />
             </div>
             {otherImages.map((image) => {
-                return (<div>
+                return (<div key={image.id}>
                     <img src={image.url} />
                 </div>)
             })}

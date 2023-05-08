@@ -5,14 +5,19 @@ import SpotContainer from './SpotContainer'
 import './spots.css'
 export default function AllSpots() {
     const dispatch = useDispatch();
-    const spots = Object.values(useSelector((state) => state.allSpots))
+
+    // const spots = useSelector((state) => state.spots)
+    const spots = Object.values(useSelector((state) => state.spots.allSpots))
+    console.log("SPOTS", spots);
+    // const allSpots = Object.values(spots.allSpots);
+
     useEffect(() => {
         dispatch(getAllSpots())
     }, [dispatch])
 
 
     return (
-        <div id="spots-grid">
+        <div className="spots-grid">
             {/* {spots.map((spot) => {
                 return <li key={spot.id}>{spot.name}</li>
             })} */}

@@ -6,6 +6,7 @@ const CREATESPOT = '/spots/CREATESPOT'
 const CREATESPOTIMAGE = '/spots/CreateSpotImage'
 
 
+
 export function loadSpots(data) {
     return {
         type: GETSPOTS,
@@ -24,6 +25,7 @@ export function createSpot(data) {
         data
     }
 }
+
 export function createSpotImage(data, id) {
     return {
         type: CREATESPOTIMAGE,
@@ -83,7 +85,15 @@ export const createSpotImageThunk = (id, body) => async dispatch => {
     return data;
 }
 
-const initialState = {};
+export const getUserSpotsThunk = () => async dispatch => {
+    const response = await csrfFetch('/api/spots/current');
+    const data = await response.json();
+    dispatch(getAllSpots(data))
+    return data;
+
+}
+
+const initialState = { allSpots: {}, singleSpot: {} };
 
 export default function spotsReducer(state = initialState, action) {
     let newState;
@@ -91,9 +101,11 @@ export default function spotsReducer(state = initialState, action) {
         case GETSPOTS:
 
             newState = Object.assign({}, state)
+            newState.allSpots = { ...newState.allSpots }
             action.data.Spots.forEach((spot) => {
-                newState[spot.id] = spot;
+                newState.allSpots[spot.id] = spot;
             });
+
             return newState;
         // case GETSPOTDETAILS:
         //     newState = Object.assign({}, state)
@@ -102,20 +114,34 @@ export default function spotsReducer(state = initialState, action) {
 
         case CREATESPOT:
             newState = Object.assign({}, state)
-            newState[action.data.id] = action.data;
+            newState.singleSpot[action.data.id] = action.data;
             return newState;
+
+        case GETSPOTDETAILS:
+            newState = Object.assign({}, state)
+
+            newState.singleSpot = action.data;
+
+            return newState;
+
+        case CREATESPOTIMAGE:
+            newState = Object.assign({}, state)
+            let images = [...newState.singleSpot[action.id].SpotImages]
+            images.push(action.data)
+
+            newState[action.id].SpotImages = images;
 
         default:
             return state;
     }
 }
 
-export function singleSpotReducer(state = initialState, action) {
+/* export function singleSpotReducer(state = initialState, action) {
     let newState;
     switch (action.type) {
         case GETSPOTDETAILS:
             newState = Object.assign({}, state)
-            newState[action.data.id] = action.data;
+            newState.singleSpot[action.data.id] = action.data;
             return newState;
         case CREATESPOTIMAGE:
             newState = Object.assign({}, state)
@@ -127,4 +153,4 @@ export function singleSpotReducer(state = initialState, action) {
         default:
             return state;
     }
-}
+} */

@@ -5,8 +5,8 @@ import spotsReducer, { singleSpotReducer } from "./spots";
 import reviewsReducer from "./reviews";
 const rootReducer = combineReducers({
   session: sessionReducer,
-  allSpots: spotsReducer,
-  singleSpot: singleSpotReducer,
+  spots: spotsReducer,
+
   reviews: reviewsReducer
 });
 
