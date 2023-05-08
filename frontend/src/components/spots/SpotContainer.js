@@ -7,7 +7,7 @@ export default function SpotContainer({ spot }) {
     const history = useHistory();
 
     return (
-        <div className="tile"
+        <div title={spot.name} className="tile"
             onClick={() => {
 
                 history.push(`/spots/${spot.id}`)

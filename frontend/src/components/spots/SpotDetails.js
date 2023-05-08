@@ -20,6 +20,7 @@ export default function SpotDetails() {
     if (Object.values(spot).length < 2) return (<></>)
     console.log("SPOT", Object.values(spot));
     const { name, city, state, country, Owner: owner, price, avgStarRating, description, numReviews } = spot;
+
     let firstName, lastName;
 
     if (owner) {
@@ -35,6 +36,7 @@ export default function SpotDetails() {
     if (user.id === spot.ownerId) {
         hiddenClassName = "hidden"
     }
+
     return (
         <>
             <h2>{name}</h2>
@@ -59,21 +61,29 @@ export default function SpotDetails() {
                 </div>
                 <div className='reserve-button'>
                     <span>{`$${price} night`}</span>
-                    <span>
+                    {numReviews > 0 && (<span>
                         <i className="fa-solid fa-star"></i>
                         {avgStarRating}
-                    </span>
-                    <span>{`${numReviews} reviews`}</span>
+                    </span>)}
+
+                    {!numReviews && (<span>  <i className="fa-solid fa-star"></i>New</span>)}
+                    {numReviews > 0 && (<span>{numReviews} reviews</span>)}
+                    {/* <span>{`${numReviews ? `${numReviews} reviews` : "New"}`}</span> */}
                     <button>Reserve</button>
                 </div>
             </div>
             <div id="review-summary">
                 <span>
                     <i className="fa-solid fa-star fa-lg"></i>
-                    {`${avgStarRating} ${numReviews} reviews`}
+                    {!numReviews && (<span>New</span>)}
+                    {(numReviews > 0) && (<span>{`${avgStarRating} ${numReviews} reviews`}</span>)}
+                    {/* {numReviews && (<span>)} */}
+                    {/* {{ numReviews > 1 } && (<span>`${avgStarRating} ${numReviews} reviews`</span>)} */}
+
 
 
                 </span>
+
                 <button className={hiddenClassName}>Post your review</button>
 
             </div>
