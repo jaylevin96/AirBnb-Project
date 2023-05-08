@@ -17,7 +17,7 @@ export default function AllSpots() {
                 return <li key={spot.id}>{spot.name}</li>
             })} */}
             {spots.map(spot => {
-                return <SpotContainer spot={spot} />
+                return <SpotContainer key={spot.id} spot={spot} />
             })}
 
 

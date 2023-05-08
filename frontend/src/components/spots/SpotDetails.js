@@ -2,14 +2,20 @@ import React, { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { getSpotDetailsThunk } from '../../store/spots';
+import SpotReviews from '../reviews/SpotReviews';
 export default function SpotDetails() {
     const params = useParams();
     let { spotId } = params;
     spotId = Number(spotId)
     const dispatch = useDispatch();
-
+    useEffect(() => {
+        dispatch(getSpotDetailsThunk(spotId))
+    }, [dispatch, spotId])
     let spots = Object.values(useSelector((state) => state.spots))
     let spot = spots.find((spot) => spot.id === spotId)
+
+    if (!spot) return (<></>)
+    // console.log("SPOT", spots);
     const { name, city, state, country, Owner: owner, price, avgStarRating, description, numReviews } = spot;
 
     return (
@@ -33,6 +39,17 @@ export default function SpotDetails() {
                 <span>{`${numReviews}reviews`}</span>
                 <button>Reserve</button>
             </div>
+            <div>
+                <span>
+                    <i className="fa-solid fa-star fa-lg"></i>
+                    {`${avgStarRating} ${numReviews} reviews`}
+
+
+                </span>
+                <button>Post your review</button>
+
+            </div>
+            <SpotReviews spotId={spotId} />
         </>
     )
 

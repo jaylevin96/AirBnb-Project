@@ -18,7 +18,7 @@ export default function SpotContainer({ spot }) {
 
             </span>
             <span>
-                <i class="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
 
                 {spot.avgRating}</span>
             <div>
