@@ -23,6 +23,26 @@ module.exports = {
         preview: true
       },
       {
+        spotId: 1,
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-720426520237441315/original/3995dd85-ea71-4eb7-9380-6a4413d109eb.jpeg?im_w=720',
+        preview: false
+      },
+      {
+        spotId: 1,
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-720426520237441315/original/63a0786e-2587-4d4e-a311-9365740a710e.jpeg?im_w=720',
+        preview: false
+      },
+      {
+        spotId: 1,
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-720426520237441315/original/4d1a15e4-be8b-4975-9d27-59928c77751c.jpeg?im_w=720',
+        preview: false
+      },
+      {
+        spotId: 1,
+        url: 'https://a0.muscache.com/im/pictures/miso/Hosting-720426520237441315/original/c0c3fb6a-4fc5-4aea-8e8e-21d092bf3fe8.jpeg?im_w=1200',
+        preview: false
+      },
+      {
         spotId: 2,
         url: 'https://a0.muscache.com/im/pictures/miso/Hosting-53669775/original/89fe9be9-f035-48f2-9f78-095ad28bbdec.jpeg?im_w=1200',
         preview: true
@@ -50,7 +70,7 @@ module.exports = {
     const Op = Sequelize.Op;
     await queryInterface.bulkDelete(options, {
       id: {
-        [Op.in]: [1, 2, 3, 4]
+        [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8]
       }
     })
 

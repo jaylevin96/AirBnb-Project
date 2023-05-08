@@ -24,6 +24,9 @@ export default function SpotDetails() {
         lastName = owner.lastName;
 
     }
+    let images = spot.SpotImages;
+    let preview = images.find((image) => image.preview)
+    let otherImages = images.filter((image) => !image.preview).slice(0, 4)
     return (
         <>
             <h2>{name}</h2>
@@ -31,6 +34,14 @@ export default function SpotDetails() {
                 {`${city}, ${state}, ${country}`}
             </span>
             <div className='images'></div>
+            <div>
+                <img src={preview.url} />
+            </div>
+            {otherImages.map((image) => {
+                return (<div>
+                    <img src={image.url} />
+                </div>)
+            })}
             <div>
                 <h3>{`Hosted by ${firstName} ${lastName}`}</h3>
                 <p>{description}</p>

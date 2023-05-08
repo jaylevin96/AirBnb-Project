@@ -15,7 +15,6 @@ export default function SpotContainer({ spot }) {
             <img src={spot.previewImage} />
             <span>
                 {spot.city},{spot.state}
-
             </span>
             <span>
                 <i className="fa-solid fa-star"></i>
