@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getUserSpotsThunk } from '../../store/spots';
+import { getSpotDetailsThunk, getUserSpotsThunk } from '../../store/spots';
 import SpotContainer from './SpotContainer';
 export default function ManageSpots() {
     const history = useHistory();
@@ -30,11 +30,15 @@ export default function ManageSpots() {
             <div className="spots-grid">
                 {userSpots.map(spot => {
                     return (
-                        <div>
-                            <SpotContainer key={spot.id} spot={spot} />
+                        <div key={spot.id}>
+                            <SpotContainer spot={spot} />
 
                             <button
-                            // onClick={ }
+                                onClick={() => {
+
+                                    dispatch(getSpotDetailsThunk(spot.id))
+                                    history.push(`/spots/${spot.id}/edit`)
+                                }}
 
                             >Update</button>
                             <button>Delete</button>

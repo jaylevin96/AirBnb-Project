@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 
 import { useDispatch } from 'react-redux'
 import { createSpotThunk, createSpotImageThunk } from '../../store/spots';
-export default function CreateSpot() {
+export default function CreateSpot({ spot }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const [country, setCountry] = useState('');
@@ -20,6 +20,41 @@ export default function CreateSpot() {
     const [image4, setImage4] = useState('')
     const [validationErrors, setValidationErrors] = useState({})
     const [submitAttempt, setSubmitAttempt] = useState(false)
+
+    useEffect(() => {
+        if (spot) {
+            setAddress(spot.address)
+            setCountry(spot.country)
+            setCity(spot.city)
+            setState(spot.state)
+            setDescription(spot.description)
+            setName(spot.name)
+            setPrice(spot.price)
+
+            let images = spot.SpotImages;
+            let preview = images.find((image) => image.preview)
+            setPreviewImage(preview.url)
+
+            let otherImages = images.filter((image) => !image.preview)
+
+            if (otherImages[0]) {
+                setImage1(otherImages[0].url)
+            }
+            if (otherImages[1]) {
+
+                setImage2(otherImages[1].url)
+            }
+            if (otherImages[2]) {
+
+                setImage3(otherImages[2].url)
+            }
+            if (otherImages[3]) {
+
+                setImage4(otherImages[3].url)
+            }
+
+        }
+    }, [spot])
     useEffect(() => {
         let errors = {}
         if (!country.length) errors.country = "Country is required"
@@ -40,6 +75,8 @@ export default function CreateSpot() {
 
 
     }, [country, address, city, state, description, name, price, previewImage, image1, image2, image3, image4])
+
+
 
     async function handleSubmit(e) {
         e.preventDefault();
