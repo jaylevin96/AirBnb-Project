@@ -34,7 +34,7 @@ export default function LoginFormModal() {
             });
     };
 
-
+    const disabled = credential.length < 4 || password.length < 6
     return (
         <div id="container">
             <h1>Log In</h1>
@@ -54,7 +54,14 @@ export default function LoginFormModal() {
                         required
                     ></input>
                 </label>
-                <button className="submit" type="submit">Log In</button>
+                <button className="submit" type="submit"
+                    // disabled={() => {
+                    //     if (credential.length < 4 || password.length < 6) return true;
+                    //     return false;
+                    // }}
+                    disabled={disabled}
+
+                >Log In</button>
                 <h2 id="demo"
                     onClick={() => {
                         dispatch(sessionActions.postSession({ credential: "Demo-lition", password: "password" })).then(closeModal)

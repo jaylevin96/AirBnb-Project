@@ -4,11 +4,12 @@ import { Redirect, useHistory } from "react-router-dom";
 export default function Logo() {
     let history = useHistory();
     return (
-        <div id="logo-text">
+        <div id="logo-text"
+            onClick={() => {
+                history.push("/")
+            }}>
             <img id="logo" src={logoImage} alt="not loading"
-                onClick={() => {
-                    history.push("/")
-                }}
+
 
             />
             <div>Jaybnb</div>

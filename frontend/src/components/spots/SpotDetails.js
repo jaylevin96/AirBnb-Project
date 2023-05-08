@@ -17,7 +17,13 @@ export default function SpotDetails() {
     if (!spot) return (<></>)
     // console.log("SPOT", spots);
     const { name, city, state, country, Owner: owner, price, avgStarRating, description, numReviews } = spot;
+    let firstName, lastName;
 
+    if (owner) {
+        firstName = owner.firstName;
+        lastName = owner.lastName;
+
+    }
     return (
         <>
             <h2>{name}</h2>
@@ -26,7 +32,7 @@ export default function SpotDetails() {
             </span>
             <div className='images'></div>
             <div>
-                <h3>{`Hosted by ${owner.firstName} ${owner.lastName}`}</h3>
+                <h3>{`Hosted by ${firstName} ${lastName}`}</h3>
                 <p>{description}</p>
 
             </div>
