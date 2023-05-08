@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllSpots } from "../../store/spots";
 import SpotContainer from './SpotContainer'
+import './spots.css'
 export default function AllSpots() {
     const dispatch = useDispatch();
     const spots = Object.values(useSelector((state) => state.allSpots))
@@ -11,7 +12,7 @@ export default function AllSpots() {
 
 
     return (
-        <>
+        <div id="spots-grid">
             {/* {spots.map((spot) => {
                 return <li key={spot.id}>{spot.name}</li>
             })} */}
@@ -20,7 +21,7 @@ export default function AllSpots() {
             })}
 
 
-        </>
+        </div>
     )
 
 

@@ -1,0 +1,38 @@
+* {
+  margin: auto;
+}
+
+#spots-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 1em;
+  width: 1000px;
+  margin: auto;
+}
+
+.tile {
+  width: 225px;
+  border: 2pt solid gray;
+}
+
+.tile img {
+  width: 225px;
+  height: auto;
+}
+.tile-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.tile-content-info {
+  text-align: left;
+  margin: 0;
+  width: max-content;
+}
+.tile-content-review {
+  text-align: right;
+  margin: 0;
+  padding-right: 0.5em;
+  position: relative;
+  bottom: 2.4em;
+}
