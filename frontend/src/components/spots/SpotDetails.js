@@ -3,12 +3,14 @@ import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { getSpotDetailsThunk } from '../../store/spots';
 import SpotReviews from '../reviews/SpotReviews';
+import './spotDetails.css';
 export default function SpotDetails() {
     const params = useParams();
     let { spotId } = params;
     spotId = Number(spotId)
     const dispatch = useDispatch();
     let spot = useSelector((state) => state.spots.singleSpot)
+    let user = useSelector((state) => state.session.user)
     // let spot = spots.singleSpot;
     useEffect(() => {
         dispatch(getSpotDetailsThunk(spotId))
@@ -28,43 +30,51 @@ export default function SpotDetails() {
     let images = spot.SpotImages;
     let preview = images.find((image) => image.preview)
     let otherImages = images.filter((image) => !image.preview).slice(0, 4)
+    let hiddenClassName = user ? "" : "hidden"
+
+    if (user.id === spot.ownerId) {
+        hiddenClassName = "hidden"
+    }
     return (
         <>
             <h2>{name}</h2>
             <span>
                 {`${city}, ${state}, ${country}`}
             </span>
-            <div className='images'></div>
-            <div>
-                <img src={preview.url} />
+            <div className='images'>
+                <div id="preview">
+                    <img src={preview.url} />
+                </div>
+                {otherImages.map((image, index) => {
+                    return (<div id={`image${index}`} key={image.id}>
+                        <img src={image.url} />
+                    </div>)
+                })}
             </div>
-            {otherImages.map((image) => {
-                return (<div key={image.id}>
-                    <img src={image.url} />
-                </div>)
-            })}
-            <div>
-                <h3>{`Hosted by ${firstName} ${lastName}`}</h3>
-                <p>{description}</p>
+            <div id="info-grid">
+                <div id="info">
+                    <h3>{`Hosted by ${firstName} ${lastName}`}</h3>
+                    <p>{description}</p>
 
+                </div>
+                <div className='reserve-button'>
+                    <span>{`$${price} night`}</span>
+                    <span>
+                        <i className="fa-solid fa-star"></i>
+                        {avgStarRating}
+                    </span>
+                    <span>{`${numReviews} reviews`}</span>
+                    <button>Reserve</button>
+                </div>
             </div>
-            <div className='reserve-button'>
-                <span>{`$${price}night`}</span>
-                <span>
-                    <i class="fa-solid fa-star"></i>
-                    {avgStarRating}
-                </span>
-                <span>{`${numReviews}reviews`}</span>
-                <button>Reserve</button>
-            </div>
-            <div>
+            <div id="review-summary">
                 <span>
                     <i className="fa-solid fa-star fa-lg"></i>
                     {`${avgStarRating} ${numReviews} reviews`}
 
 
                 </span>
-                <button>Post your review</button>
+                <button className={hiddenClassName}>Post your review</button>
 
             </div>
             <SpotReviews spotId={spotId} />

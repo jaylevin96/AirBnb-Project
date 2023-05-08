@@ -3,17 +3,25 @@
 }
 
 .spots-grid {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   column-gap: 1em;
   row-gap: 3em;
   width: 1000px;
+  margin: auto; */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 240px);
+  /* width: 1024px; */
   margin: auto;
+  justify-content: center;
+  row-gap: 3em;
+  column-gap: 1em;
 }
 
 .tile {
   width: 225px;
   border: 2pt solid gray;
+  /* flex: 1; */
 }
 
 .tile img {
