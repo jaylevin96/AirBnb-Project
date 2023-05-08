@@ -21,12 +21,14 @@
 .tile {
   width: 225px;
   border: 2pt solid gray;
+  border-radius: 10px;
   /* flex: 1; */
 }
 
 .tile img {
   width: 225px;
   height: auto;
+  border-radius: 10px;
 }
 .tile-content {
   display: flex;

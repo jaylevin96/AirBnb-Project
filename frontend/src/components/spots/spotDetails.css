@@ -26,9 +26,15 @@
   width: 100%;
   margin: 0;
 }
-#info h3 {
+#info h3,
+#info p {
   margin: 0;
+  margin-left: 16px;
   padding: 1em 0 1em 0;
+}
+h2,
+h2 + span {
+  margin-left: 16px;
 }
 
 .reserve-button {
@@ -55,6 +61,7 @@
 #review-summary {
   display: flex;
   margin: 0;
+  margin-left: 16px;
   flex-direction: column;
   /* width: 50%; */
 }
@@ -65,4 +72,8 @@
 #review-summary button {
   margin: 1.5em 0;
   width: fit-content;
+}
+
+.reviews-container {
+  margin-left: 16px;
 }

@@ -6,7 +6,7 @@ export default function ReviewDetail({ review: data }) {
     const month = createdAt.slice(5, 7)
     return (
         <div>
-            <h3>{User.firstName}</h3>
+            <h4>{User.firstName}</h4>
             <span>{`${year} ${month} `}</span>
             <span>{`${stars} stars`}</span>
             <p>{review}</p>

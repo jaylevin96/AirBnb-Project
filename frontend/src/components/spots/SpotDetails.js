@@ -77,7 +77,10 @@ export default function SpotDetails() {
                 <button className={hiddenClassName}>Post your review</button>
 
             </div>
-            <SpotReviews spotId={spotId} />
+            <div className='reviews-container'>
+                <SpotReviews spotId={spotId} />
+
+            </div>
         </>
     )
 
