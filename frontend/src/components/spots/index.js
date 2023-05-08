@@ -4,7 +4,7 @@ import { getAllSpots } from "../../store/spots";
 import SpotContainer from './SpotContainer'
 export default function AllSpots() {
     const dispatch = useDispatch();
-    const spots = Object.values(useSelector((state) => state.spots))
+    const spots = Object.values(useSelector((state) => state.allSpots))
 
     useEffect(() => {
         dispatch(getAllSpots())

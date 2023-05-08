@@ -11,7 +11,7 @@ export default function SpotDetails() {
     useEffect(() => {
         dispatch(getSpotDetailsThunk(spotId))
     }, [dispatch, spotId])
-    let spots = Object.values(useSelector((state) => state.spots))
+    let spots = Object.values(useSelector((state) => state.singleSpot))
     let spot = spots.find((spot) => spot.id === spotId)
 
     if (!spot) return (<></>)

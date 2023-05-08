@@ -61,3 +61,15 @@ export default function spotsReducer(state = initialState, action) {
             return state;
     }
 }
+
+export function singleSpotReducer(state = initialState, action) {
+    let newState;
+    switch (action.type) {
+        case GETSPOTDETAILS:
+            newState = Object.assign({}, state)
+            newState[action.data.id] = action.data;
+            return newState;
+        default:
+            return state;
+    }
+}
