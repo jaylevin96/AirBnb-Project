@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { getSpotDetailsThunk, getUserSpotsThunk } from '../../store/spots';
 import SpotContainer from './SpotContainer';
+import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
+import DeleteFormModal from './DeleteFormModal';
 export default function ManageSpots() {
     const history = useHistory();
     const dispatch = useDispatch();
@@ -41,7 +43,12 @@ export default function ManageSpots() {
                                 }}
 
                             >Update</button>
-                            <button>Delete</button>
+                            <button>
+                                <OpenModalMenuItem itemText="Delete"
+                                    modalComponent={<DeleteFormModal spotId={spot.id} />} />
+
+
+                            </button>
                         </div>)
 
                 })}

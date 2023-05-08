@@ -28,7 +28,7 @@ label {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-left: 7em;
+  /* margin-left: 7em; */
 }
 
 .submit {

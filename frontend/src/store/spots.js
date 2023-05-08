@@ -4,7 +4,7 @@ const GETSPOTS = '/spots/GETSPOTS'
 const GETSPOTDETAILS = '/spots/getspotdetails'
 const CREATESPOT = '/spots/CREATESPOT'
 const CREATESPOTIMAGE = '/spots/CreateSpotImage'
-const EDITSPOT = '/spots/EDITSPOT'
+const DELETESPOT = '/spots/DELETESPOT'
 
 
 export function loadSpots(data) {
@@ -25,12 +25,13 @@ export function createSpot(data) {
         data
     }
 }
-// export function editSpot(data) {
-//     return {
-//         type: EDITSPOT,
-//         data
-//     }
-// }
+export function deleteSpot(data, id) {
+    return {
+        type: DELETESPOT,
+        data,
+        id
+    }
+}
 
 export function createSpotImage(data, id) {
     return {
@@ -102,7 +103,7 @@ export const getUserSpotsThunk = () => async dispatch => {
 export const editSpotThunk = (id, body) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${id}`,
         {
-            method: "POST",
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -112,6 +113,14 @@ export const editSpotThunk = (id, body) => async dispatch => {
     const data = await response.json();
     dispatch(createSpot(data))
     return data;
+}
+
+export const deleteSpotThunk = (id) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${id}`, {
+        method: "DELETE"
+    })
+    const data = await response.json();
+    dispatch(deleteSpot(data, id))
 }
 
 const initialState = { allSpots: {}, singleSpot: { SpotImages: [] } };
@@ -154,6 +163,12 @@ export default function spotsReducer(state = initialState, action) {
             return newState;
         // newState[action.id].SpotImages = images;
 
+        case DELETESPOT: {
+            newState = Object.assign({}, state)
+            newState.allSpots = { ...newState.allSpots }
+            delete newState.allSpots[action.id]
+            return newState;
+        }
         default:
             return state;
     }

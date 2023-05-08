@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { createSpotThunk, createSpotImageThunk, editSpotThunk } from '../../store/spots';
-export default function CreateSpot({ spot }) {
+export default function CreateSpot({ spot, form }) {
     const dispatch = useDispatch();
     const history = useHistory();
 
@@ -34,7 +34,10 @@ export default function CreateSpot({ spot }) {
 
             let images = spot.SpotImages;
             let preview = images.find((image) => image.preview)
-            setPreviewImage(preview.url)
+            if (preview) {
+
+                setPreviewImage(preview.url)
+            }
 
             let otherImages = images.filter((image) => !image.preview)
 
@@ -85,7 +88,8 @@ export default function CreateSpot({ spot }) {
 
         if (Object.values(validationErrors).length) return;
         if (spot) {
-            dispatch(editSpotThunk({ country, address, city, state, description, name, price, lat: 0, lng: 0 }))
+            dispatch(editSpotThunk(spot.id, { country, address, city, state, description, name, price, lat: 0, lng: 0 }))
+            history.push(`/spots/${spot.id}`)
         }
         else {
             const newSpot = await dispatch(createSpotThunk({ country, address, city, state, description, name, price, lat: 0, lng: 0 }))
@@ -182,7 +186,7 @@ export default function CreateSpot({ spot }) {
                 value={image4}
                 onChange={(e) => setImage4(e.target.value)}></input>
             {submitAttempt && (<span className="form-error">{validationErrors.image4}</span>)}
-            <button type="submit">Create Spot</button>
+            <button type="submit">{`${form ? 'Update Spot' : 'Create Spot'}`}</button>
 
         </form>
     </>)

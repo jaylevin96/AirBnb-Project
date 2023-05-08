@@ -5,5 +5,5 @@ export default function EditSpot() {
     const spot = useSelector((state) => state.spots.singleSpot)
 
 
-    return <CreateSpot spot={spot} />
+    return <CreateSpot spot={spot} form="Update Spot" />
 }
