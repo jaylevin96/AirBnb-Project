@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
-import { useDispatch } from 'react-redux'
-import { createSpotThunk, createSpotImageThunk } from '../../store/spots';
+import { useDispatch, useSelector } from 'react-redux'
+import { createSpotThunk, createSpotImageThunk, editSpotThunk } from '../../store/spots';
 export default function CreateSpot({ spot }) {
     const dispatch = useDispatch();
     const history = useHistory();
+
     const [country, setCountry] = useState('');
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('');
@@ -83,14 +84,18 @@ export default function CreateSpot({ spot }) {
         setSubmitAttempt(true)
 
         if (Object.values(validationErrors).length) return;
-
-        console.log("hi2");
-        const newSpot = await dispatch(createSpotThunk({ country, address, city, state, description, name, price, lat: 0, lng: 0 }))
-        const previewImage = await dispatch(createSpotImageThunk(newSpot.id, { url: previewImage, preview: true }))
-
-        history.push(`/spots/${newSpot.id}`)
-
-
+        if (spot) {
+            dispatch(editSpotThunk({ country, address, city, state, description, name, price, lat: 0, lng: 0 }))
+        }
+        else {
+            const newSpot = await dispatch(createSpotThunk({ country, address, city, state, description, name, price, lat: 0, lng: 0 }))
+            dispatch(createSpotImageThunk(newSpot.id, { url: previewImage, preview: true }))
+            const images = [image1, image2, image3, image4]
+            images.forEach((image) => {
+                dispatch(createSpotImageThunk(newSpot.id, { url: image, preview: false }))
+            })
+            history.push(`/spots/${newSpot.id}`)
+        }
     }
 
     return (<>

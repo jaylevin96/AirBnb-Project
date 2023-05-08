@@ -14,9 +14,9 @@ export default function SpotDetails() {
         dispatch(getSpotDetailsThunk(spotId))
     }, [dispatch, spotId])
     // let spot = spots.find((spot) => spot.id === spotId)
-    console.log("SPOT", spot);
-    if (!Object.values(spot).length) return (<></>)
-    // console.log("SPOT", spots);
+    // console.log("SPOT", spot);
+    if (Object.values(spot).length < 2) return (<></>)
+    console.log("SPOT", Object.values(spot));
     const { name, city, state, country, Owner: owner, price, avgStarRating, description, numReviews } = spot;
     let firstName, lastName;
 
