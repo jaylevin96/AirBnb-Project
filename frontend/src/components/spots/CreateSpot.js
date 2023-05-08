@@ -1,8 +1,11 @@
-import React, { useEffect, useHistory, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import { useDispatch } from 'react-redux'
+import { createSpotThunk, createSpotImageThunk } from '../../store/spots';
 export default function CreateSpot() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [country, setCountry] = useState('');
     const [address, setAddress] = useState('')
     const [city, setCity] = useState('');
@@ -38,10 +41,18 @@ export default function CreateSpot() {
 
     }, [country, address, city, state, description, name, price, previewImage, image1, image2, image3, image4])
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
         setSubmitAttempt(true)
+
         if (Object.values(validationErrors).length) return;
+
+        console.log("hi2");
+        const newSpot = await dispatch(createSpotThunk({ country, address, city, state, description, name, price, lat: 0, lng: 0 }))
+        const previewImage = await dispatch(createSpotImageThunk(newSpot.id, { url: previewImage, preview: true }))
+
+        history.push(`/spots/${newSpot.id}`)
+
 
     }
 
@@ -62,6 +73,14 @@ export default function CreateSpot() {
                 <input type="text"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}></input>
+            </label>
+            <label>
+                City
+                {submitAttempt && (<span className="form-error">{validationErrors.city}</span>)}
+                <input type="text"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                ></input>
             </label>
             <label>State
                 {submitAttempt && (<span className="form-error">{validationErrors.state}</span>)}
