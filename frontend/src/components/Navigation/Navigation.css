@@ -1,8 +1,9 @@
 .profile-dropdown {
   background-color: aliceblue;
-  width: 100px;
+  width: max-content;
   padding: 0;
-  position: relative;
+  position: absolute;
+  top: 3em;
   border: 1pt solid gray;
 }
 #profileButton {

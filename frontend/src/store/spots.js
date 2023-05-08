@@ -1,10 +1,17 @@
 import { csrfFetch } from "./csrf";
 
 const GETSPOTS = '/spots/GETSPOTS'
+const GETSPOTDETAILS = '/spots/getspotdetails'
 
 export function loadSpots(data) {
     return {
         type: GETSPOTS,
+        data
+    }
+}
+export function getSpot(data) {
+    return {
+        type: GETSPOTDETAILS,
         data
     }
 }
@@ -21,6 +28,16 @@ export const getAllSpots = () => async dispatch => {
 
 }
 
+
+export const getSpotDetailsThunk = (id) => async dispatch => {
+    const response = await csrfFetch(`/api/spots/${id}`)
+    const data = await response.json();
+
+    dispatch(getSpot(data))
+    return data;
+}
+
+
 const initialState = {};
 
 export default function spotsReducer(state = initialState, action) {
@@ -29,9 +46,13 @@ export default function spotsReducer(state = initialState, action) {
         case GETSPOTS:
 
             newState = Object.assign({}, state)
-            let spots = action.data.Spots.forEach((spot) => {
+            action.data.Spots.forEach((spot) => {
                 newState[spot.id] = spot;
             });
+            return newState;
+        case GETSPOTDETAILS:
+            newState = Object.assign({}, state)
+            newState[action.data.id] = action.data;
             return newState;
 
 

@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import * as sessionActions from "./store/session"
 import Navigation from './components/Navigation/index'
 import AllSpots from "./components/spots";
-
+import SpotDetails from "./components/spots/SpotDetails"
 function App() {
   const dispatch = useDispatch()
   const [isLoaded, setIsLoaded] = useState(false);
@@ -22,6 +22,9 @@ function App() {
           <Switch>
             <Route exact path="/">
               <AllSpots />
+            </Route>
+            <Route path="/spots/:spotId">
+              <SpotDetails />
             </Route>
 
           </Switch>

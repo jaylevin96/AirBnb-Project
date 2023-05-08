@@ -21,6 +21,7 @@ input {
   align-self: flex-end;
   width: 200px;
   height: 20px;
+  background-color: aliceblue;
 }
 
 label {
@@ -32,6 +33,19 @@ label {
 
 .submit {
   margin: 2em 0em;
-  width: 100px;
-  height: 20px;
+  width: 80%;
+  height: 30px;
+  background-color: white;
+  color: gray;
+  box-shadow: 3px 3px 0px gray;
+}
+
+#demo {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+#errors-message {
+  text-align: center;
+  color: red;
 }

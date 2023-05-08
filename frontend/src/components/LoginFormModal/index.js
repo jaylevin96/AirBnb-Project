@@ -20,15 +20,25 @@ export default function LoginFormModal() {
         setErrors({})
         return dispatch(sessionActions.postSession({ credential, password })).then(closeModal)
             .catch(async (res) => {
+
                 const data = await res.json();
+
+
                 if (data && data.errors) {
                     setErrors(data.errors);
                 }
+                if (data.message) {
+                    setErrors({ credential: data.message })
+                }
+                // if (data.)
             });
     };
+
+
     return (
         <div id="container">
             <h1>Log In</h1>
+            {errors.credential && <p id="errors-message">The provided credentials were invalid.</p>}
             <form onSubmit={onSubmit}>
                 <label>Username or Email
                     <input type="text"
@@ -44,8 +54,19 @@ export default function LoginFormModal() {
                         required
                     ></input>
                 </label>
-                {errors.credential && <p>{errors.credential}</p>}
                 <button className="submit" type="submit">Log In</button>
+                <h2 id="demo"
+                    onClick={() => {
+                        dispatch(sessionActions.postSession({ credential: "Demo-lition", password: "password" })).then(closeModal)
+                            .catch(async (res) => {
+                                const data = await res.json();
+                                if (data && data.errors) {
+                                    setErrors(data.errors);
+                                }
+                            })
+                    }}
+
+                >Demo User</h2>
             </form>
 
         </div>

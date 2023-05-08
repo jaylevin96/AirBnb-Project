@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getAllSpots } from "../../store/spots";
+import SpotContainer from './SpotContainer'
 export default function AllSpots() {
     const dispatch = useDispatch();
     const spots = Object.values(useSelector((state) => state.spots))
@@ -9,12 +10,15 @@ export default function AllSpots() {
         dispatch(getAllSpots())
     }, [dispatch])
 
+
     return (
         <>
-            {spots.map((spot) => {
+            {/* {spots.map((spot) => {
                 return <li key={spot.id}>{spot.name}</li>
+            })} */}
+            {spots.map(spot => {
+                return <SpotContainer spot={spot} />
             })}
-
 
 
         </>
