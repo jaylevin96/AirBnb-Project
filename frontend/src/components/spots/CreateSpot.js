@@ -104,7 +104,7 @@ export default function CreateSpot({ spot, form }) {
     }
 
     return (<div id="form-container">
-        <h2>Create a New Spot</h2>
+        <h2>{spot ? "Update Spot" : "Create a New Spot"}</h2>
         <h3>Where's your place located?</h3>
         <p>Guests will only get your exact address once they booked a reservation.</p>
         <form onSubmit={handleSubmit}>

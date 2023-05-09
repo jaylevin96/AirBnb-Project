@@ -14,12 +14,15 @@ export default function SpotDetails() {
     const dispatch = useDispatch();
     let spot = useSelector((state) => state.spots.singleSpot)
     let user = useSelector((state) => state.session.user)
+    let userSpotReviews = Object.values(useSelector(state => state.reviews.spot)).filter((review) => review.userId === user.id)
     const [loading, setLoading] = useState(true)
 
     // let spot = spots.singleSpot;
     useEffect(() => {
+
         dispatch(getSpotDetailsThunk(spotId)).then(() => setLoading(false))
         dispatch(getReviewsThunk(spotId))
+
 
     }, [dispatch, spotId])
     // let spot = spots.find((spot) => spot.id === spotId)
@@ -40,21 +43,21 @@ export default function SpotDetails() {
     let otherImages = images.filter((image) => !image.preview).slice(0, 4)
     let hiddenClassName = user ? "" : "hidden"
 
-    if (user && (user.id === spot.ownerId)) {
+    if (user && (user.id === spot.ownerId || userSpotReviews.length)) {
         hiddenClassName = "hidden"
     }
 
     if (loading) return <></>
     console.log("loading?");
     return (
-        <>
+        <div id="details-container">
             <h2>{name}</h2>
             <span>
                 {`${city}, ${state}, ${country}`}
             </span>
             <div className='images'>
                 <div id="preview">
-                    <img src={preview.url} />
+                    <img src={preview?.url} />
                 </div>
                 {otherImages.map((image, index) => {
                     return (<div id={`image${index}`} key={image.id}>
@@ -104,7 +107,7 @@ export default function SpotDetails() {
                 <SpotReviews spotId={spotId} />
 
             </div>
-        </>
+        </div>
     )
 
 

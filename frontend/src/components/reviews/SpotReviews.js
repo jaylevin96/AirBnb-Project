@@ -18,7 +18,7 @@ export default function SpotReviews({ spotId }) {
     return (
         <>
 
-            {spotReviews.map((review) => {
+            {spotReviews.reverse().map((review) => {
 
 
                 return (<div className="review-post">

@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import "./LoginForm.css"
 import { useModal } from "../../context/Modal";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 export default function LoginFormModal() {
 
     const dispatch = useDispatch();
+    const history = useHistory()
     // const sessionUser = useSelector((state) => state.session.user)
     const [credential, setCredential] = useState("")
     const [password, setPassword] = useState("")
@@ -18,7 +20,7 @@ export default function LoginFormModal() {
     const onSubmit = (e) => {
         e.preventDefault();
         setErrors({})
-        return dispatch(sessionActions.postSession({ credential, password })).then(closeModal)
+        dispatch(sessionActions.postSession({ credential, password })).then(closeModal)
             .catch(async (res) => {
 
                 const data = await res.json();
@@ -32,6 +34,8 @@ export default function LoginFormModal() {
                 }
                 // if (data.)
             });
+        history.push('/')
+
     };
 
     const disabled = credential.length < 4 || password.length < 6

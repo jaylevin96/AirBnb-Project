@@ -1,6 +1,7 @@
 import { csrfFetch } from "./csrf";
 const GETREVIEWSBYSPOT = '/reviews/spotId'
 const POSTREVIEW = '/reviews/post'
+const GETEVIEWSBYUSER = '/reviews/current'
 
 export function getReviews(data) {
     return {
@@ -14,6 +15,12 @@ export function postReview(data) {
         type: POSTREVIEW,
         data
 
+    }
+}
+export function getReviewsCurrent(data) {
+    return {
+        type: GETEVIEWSBYUSER,
+        data
     }
 }
 
@@ -35,6 +42,11 @@ export const postReviewsThunk = (id, body) => async dispatch => {
     dispatch(postReview(data))
     return data;
 }
+export const getReviewsCurrentThunk = () => async dispatch => {
+    const response = await csrfFetch('/api/reviews/current')
+    const data = await response.json();
+    dispatch(getReviewsCurrent(data))
+}
 
 const initialState = { spot: {}, user: {} }
 export default function reviewsReducer(state = initialState, action) {
@@ -54,6 +66,14 @@ export default function reviewsReducer(state = initialState, action) {
             newState.spot.User = { ...newState.spot.User }
 
             newState.spot[action.data.id] = action.data;
+            return newState;
+
+        case GETEVIEWSBYUSER:
+            newState = Object.assign({}, state)
+            newState.user = { ...newState.user }
+            action.data.Reviews.forEach((review) => {
+                newState.user[review.id] = review;
+            })
             return newState;
 
         default:

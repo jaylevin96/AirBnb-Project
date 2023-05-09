@@ -1,3 +1,6 @@
+#details-container {
+  max-width: 1000px;
+}
 .images {
   display: grid;
   grid-template-areas:
