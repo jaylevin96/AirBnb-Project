@@ -5,6 +5,10 @@
   box-shadow: 5px 5px 5px gray;
 } */
 
+#modal-content {
+  width: 400px;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -17,23 +21,25 @@ h1 {
   text-align: center;
 }
 input {
-  margin-right: 7em;
+  /* margin-left: 4em; */
   align-self: flex-end;
   width: 200px;
+  margin: 0;
   height: 20px;
   background-color: aliceblue;
 }
 
 label {
+  /* text-align: center; */
   display: flex;
   justify-content: space-between;
   width: 100%;
+
   /* margin-left: 7em; */
 }
 
 .submit {
   margin: 2em 0em;
-  width: 80%;
   height: 30px;
   background-color: white;
   color: gray;
@@ -43,6 +49,7 @@ label {
 #demo {
   cursor: pointer;
   text-decoration: underline;
+  margin: auto;
 }
 
 #errors-message {

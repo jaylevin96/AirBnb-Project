@@ -40,7 +40,7 @@ export default function SpotDetails() {
     let otherImages = images.filter((image) => !image.preview).slice(0, 4)
     let hiddenClassName = user ? "" : "hidden"
 
-    if (user.id === spot.ownerId) {
+    if (user && (user.id === spot.ownerId)) {
         hiddenClassName = "hidden"
     }
 
