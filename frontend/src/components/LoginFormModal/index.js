@@ -54,7 +54,7 @@ export default function LoginFormModal() {
                         required
                     ></input>
                 </label>
-                <button className="submit" type="submit"
+                <button className={disabled ? "submit" : "submit styled"} type="submit"
                     // disabled={() => {
                     //     if (credential.length < 4 || password.length < 6) return true;
                     //     return false;

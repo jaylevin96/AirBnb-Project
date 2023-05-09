@@ -40,6 +40,7 @@ h2 + span {
 .reserve-button {
   border: 1pt solid black;
   border-radius: 10px;
+  padding: 1em 0;
   display: flex;
   flex-wrap: wrap;
   width: 80%;
@@ -47,6 +48,9 @@ h2 + span {
 .reserve-button button {
   width: 90%;
   margin: 1em auto;
+  color: white;
+  font-weight: 500;
+  background-color: #ff5a5f;
 }
 #info-grid {
   display: grid;
