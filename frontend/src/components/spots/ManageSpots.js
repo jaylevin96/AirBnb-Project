@@ -28,17 +28,19 @@ export default function ManageSpots() {
 
     return (
         <>
-            <h2>Manage Your Spots</h2>
-            <button
-                onClick={() => {
-                    history.push('/spots/new')
+            <div id="manage-header">
+                <h2>Manage Your Spots</h2>
+                <button
+                    onClick={() => {
+                        history.push('/spots/new')
 
-                }}
-            >Create a New Spot</button>
+                    }}
+                >Create a New Spot</button>
+            </div>
             <div className="spots-grid">
                 {userSpots.map(spot => {
                     return (
-                        <div key={spot.id}>
+                        <div id='manage-tile' key={spot.id}>
                             <SpotContainer spot={spot} />
                             <div id="manage-buttons-container">
                                 <button id="manage-update-spot"

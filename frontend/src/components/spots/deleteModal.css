@@ -1,12 +1,27 @@
 .modal-delete-buttons {
-  margin: 0;
-  width: 35%;
-  height: 30px;
+  margin: auto;
+  width: 80%;
+  height: 50px;
 }
+
+#delete.modal-delete-buttons {
+  color: white;
+  background-color: #ff5a5f;
+  font-weight: 500;
+  font-size: 13pt;
+}
+#keep.modal-delete-buttons {
+  color: white;
+  font-weight: 500;
+  font-size: 13pt;
+  background-color: rgb(77, 75, 75);
+}
+
 #delete-modal-buttons-container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  column-gap: 2em;
+  row-gap: 2em;
   margin-top: 2em;
 }
 

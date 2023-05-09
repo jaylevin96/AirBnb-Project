@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 export default function SpotContainer({ spot }) {
     const history = useHistory();
     let rating = Math.round(spot.avgRating * 100) / 100;
+    rating = rating.toFixed(2)
     if (!rating) rating = "New"
     return (
         <div title={spot.name} className="tile"
@@ -15,7 +16,7 @@ export default function SpotContainer({ spot }) {
             }}>
             <img src={spot.previewImage} />
             <div className="tile-content">
-                <span className="tile-content-info">
+                <span className="tile-content-info location">
                     {spot.city}, {spot.state}
                 </span>
                 <span className="tile-content-info">

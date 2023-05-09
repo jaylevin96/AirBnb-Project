@@ -98,3 +98,13 @@ h2 + span {
 #post-review-button {
   list-style-type: none;
 }
+
+#span-review-summary {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 1.5em;
+}
+#span-review-summary span {
+  margin: 0;
+}

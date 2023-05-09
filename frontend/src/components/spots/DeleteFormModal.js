@@ -12,13 +12,13 @@ export default function DeleteFormModal({ spotId }) {
             <h1>Confirm Delete</h1>
             <h3 id="confirm-delete-text">Are you sure you want to remove this spot from the listings?</h3>
             <div id="delete-modal-buttons-container">
-                <button className="modal-delete-buttons"
+                <button id="delete" className="modal-delete-buttons"
                     onClick={() => {
                         dispatch(deleteSpotThunk(spotId))
                         closeModal();
                     }}
                 >{`Yes (Delete spot)`}</button>
-                <button className="modal-delete-buttons"
+                <button id="keep" className="modal-delete-buttons"
                     onClick={() => closeModal()}
                 >{`No (Keep Spot)`}</button>
 

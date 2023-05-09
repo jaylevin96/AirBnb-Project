@@ -77,20 +77,29 @@ export default function SpotDetails() {
                     <span>{`$${price} night`}</span>
                     {numReviews > 0 && (<span>
                         <i className="fa-solid fa-star"></i>
-                        {avgStarRating}
+                        {avgStarRating.toFixed(2)}
                     </span>)}
 
                     {!numReviews && (<span>  <i className="fa-solid fa-star"></i>New</span>)}
-                    {numReviews > 0 && (<span>{numReviews} reviews</span>)}
+                    {numReviews > 0 && (<span>{numReviews} {numReviews < 2 ? "review" : "reviews"}</span>)}
                     {/* <span>{`${numReviews ? `${numReviews} reviews` : "New"}`}</span> */}
                     <button>Reserve</button>
                 </div>
             </div>
             <div id="review-summary">
-                <span>
-                    <i className="fa-solid fa-star fa-lg"></i>
-                    {!numReviews && (<span>New</span>)}
-                    {(numReviews > 0) && (<span>{`${avgStarRating} ${numReviews} reviews`}</span>)}
+                <span id="span-review-summary">
+                    <span>
+                        <i className="fa-solid fa-star fa-lg"></i>
+                        {!numReviews && (<span>New</span>)}
+                        {(numReviews > 0) && (
+                            <span>{avgStarRating.toFixed(2)}</span>
+                        )}
+                    </span>
+                    {(numReviews > 0) && (
+                        <span>
+                            <span>{`${numReviews} ${numReviews < 2 ? "review" : "reviews"}`}</span>
+                        </span>
+                    )}
                     {/* {numReviews && (<span>)} */}
                     {/* {{ numReviews > 1 } && (<span>`${avgStarRating} ${numReviews} reviews`</span>)} */}
 
