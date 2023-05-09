@@ -75,12 +75,20 @@
   font-weight: 600;
   box-shadow: 2px 2px 1px black;
 }
+#manage-create-new-spot-button {
+  width: 250px;
+  height: 40px;
+  box-shadow: 2px 2px 1px black;
+  color: white;
+  font-weight: 600;
+  background-color: #ff5a5f;
+}
 
 #manage-buttons-container {
   display: flex;
   justify-content: center;
   column-gap: 1em;
-  margin-top: 0.75em;
+  /* margin-top: 0.3em; */
 }
 
 #manage-header {

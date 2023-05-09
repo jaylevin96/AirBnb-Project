@@ -30,7 +30,7 @@ export default function ManageSpots() {
         <>
             <div id="manage-header">
                 <h2>Manage Your Spots</h2>
-                <button
+                <button id="manage-create-new-spot-button"
                     onClick={() => {
                         history.push('/spots/new')
 
