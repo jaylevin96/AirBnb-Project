@@ -15,10 +15,11 @@ export default function Navigation({ isLoaded }) {
 
             {isLoaded && (
                 <>
-                    <li className={hideClass}>
-                        <NavLink to="/spots/new">Create a New Spot</NavLink>
-                    </li>
+
                     <li id="profile-menu">
+
+                        <NavLink className={hideClass} to="/spots/new">Create a New Spot</NavLink>
+
                         <ProfileButton user={sessionUser} />
                     </li>
                 </>
