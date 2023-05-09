@@ -81,3 +81,7 @@ h2 + span {
 .review-post {
   margin: 2em 0;
 }
+
+.review-timestamp {
+  color: gray;
+}
