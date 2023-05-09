@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { useModal } from "../../context/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { postReviewsThunk, getReviewsThunk } from "../../store/reviews";
+import { getSpotDetailsThunk } from "../../store/spots";
 import "./reviewModal.css"
 export default function ReviewModal() {
     const [review, setReview] = useState('');
@@ -45,9 +46,7 @@ export default function ReviewModal() {
             </div>
             <button
                 onClick={() => {
-                    dispatch(postReviewsThunk(spot.id, { review, stars }))
-
-                    closeModal();
+                    dispatch(postReviewsThunk(spot.id, { review, stars })).then(() => { dispatch(getSpotDetailsThunk(spot.id)) }).then(closeModal)
                 }}
                 disabled={stars < 1 || review.length < 10}
             >Submit Your Review</button>
