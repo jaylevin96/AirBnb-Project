@@ -49,6 +49,7 @@ export default function SpotDetails() {
         hiddenClassName = "hidden"
     }
 
+
     if (loading) return <></>
 
     return (
@@ -74,7 +75,7 @@ export default function SpotDetails() {
 
                 </div>
                 <div className='reserve-button'>
-                    <span>{`$${price} night`}</span>
+                    <span id="reserve-price">{`$${price}`}<span> night</span></span>
                     {numReviews > 0 && (<span>
                         <i className="fa-solid fa-star"></i>
                         {avgStarRating.toFixed(2)}

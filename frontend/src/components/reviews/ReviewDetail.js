@@ -1,15 +1,21 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getReviewsThunk } from "../../store/reviews";
+import { deleteReviewThunk, getReviewsThunk } from "../../store/reviews";
+import { getSpotDetailsThunk } from "../../store/spots";
+import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import DeleteReviewModal from "./DeleteReviewModal";
 export default function ReviewDetail({ reviewId, spotId }) {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getReviewsThunk(spotId))
     }, [dispatch])
     const reviews = Object.values(useSelector((state) => state.reviews.spot));
+    let user = useSelector((state) => state.session.user)
     if (!reviews.length) return <></>
     const reviewRecord = reviews.find((review) => review.id === reviewId)
     const { review, stars, User, createdAt } = reviewRecord;
+    const userIsReviewOwner = reviewRecord.userId === user.id;
+    const deleteButtonClass = userIsReviewOwner ? "" : "hidden";
     let firstName;
     if (User) {
         firstName = User.firstName
@@ -36,6 +42,12 @@ export default function ReviewDetail({ reviewId, spotId }) {
             <span className="review-timestamp">{`${months[month]} ${year}  `}</span>
             <span>{`${stars} stars`}</span>
             <p>{review}</p>
+            <button id="review-delete-button" className={deleteButtonClass}>
+                <OpenModalMenuItem itemText="Delete"
+                    modalComponent={<DeleteReviewModal reviewId={reviewId} spotId={spotId} />} />
+
+
+            </button>
         </div>
 
 

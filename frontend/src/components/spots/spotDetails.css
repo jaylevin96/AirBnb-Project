@@ -49,6 +49,13 @@ h2 + span {
   flex-wrap: wrap;
   width: 80%;
 }
+#reserve-price {
+  font-size: 13pt;
+  margin-right: 2em;
+}
+.reserve-button span {
+  font-size: 9pt;
+}
 .reserve-button button {
   width: 90%;
   height: 30px;
@@ -93,6 +100,12 @@ h2 + span {
 
 .review-timestamp {
   color: gray;
+}
+#review-delete-button {
+  list-style-type: none;
+  color: white;
+  margin-top: 1em;
+  background-color: rgb(77, 75, 75);
 }
 
 #post-review-button {
