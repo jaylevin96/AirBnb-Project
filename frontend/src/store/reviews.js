@@ -55,6 +55,7 @@ export default function reviewsReducer(state = initialState, action) {
         case GETREVIEWSBYSPOT:
             newState = Object.assign({}, state)
             newState.spot = { ...newState.spot }
+            newState.user = { ...newState.user }
             newState.spot.User = { ...newState.spot.User }
             action.data.Reviews.forEach((review) => {
                 newState.spot[review.id] = review;
@@ -63,6 +64,7 @@ export default function reviewsReducer(state = initialState, action) {
         case POSTREVIEW:
             newState = Object.assign({}, state)
             newState.spot = { ...newState.spot }
+            newState.user = { ...newState.user }
             newState.spot.User = { ...newState.spot.User }
 
             newState.spot[action.data.id] = action.data;
@@ -71,6 +73,7 @@ export default function reviewsReducer(state = initialState, action) {
         case GETEVIEWSBYUSER:
             newState = Object.assign({}, state)
             newState.user = { ...newState.user }
+            newState.spot = { ...newState.spot }
             action.data.Reviews.forEach((review) => {
                 newState.user[review.id] = review;
             })

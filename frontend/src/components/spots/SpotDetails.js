@@ -8,27 +8,27 @@ import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import ReviewModal from '../reviews/ReviewModal';
 import { getReviewsThunk } from '../../store/reviews';
 export default function SpotDetails() {
+    console.log("details re-rendered");
     const params = useParams();
     let { spotId } = params;
     spotId = Number(spotId)
     const dispatch = useDispatch();
     let spot = useSelector((state) => state.spots.singleSpot)
     let user = useSelector((state) => state.session.user)
-    let userSpotReviews = Object.values(useSelector(state => state.reviews.spot)).filter((review) => review.userId === user.id)
+    let userSpotReviews = Object.values(useSelector(state => state.reviews.spot))
+    if (user) {
+        userSpotReviews = userSpotReviews.filter((review) => review.userId === user.id && review.spotId === spot.id)
+    }
     const [loading, setLoading] = useState(true)
 
     // let spot = spots.singleSpot;
     useEffect(() => {
-
-        dispatch(getSpotDetailsThunk(spotId)).then(() => setLoading(false))
-        dispatch(getReviewsThunk(spotId))
-
-
+        dispatch(getSpotDetailsThunk(spotId)).then(dispatch(getReviewsThunk(spotId))).then(() => setLoading(false))
     }, [dispatch, spotId])
     // let spot = spots.find((spot) => spot.id === spotId)
     // console.log("SPOT", spot);
     if (Object.values(spot).length < 2) return (<></>)
-    console.log("SPOT", Object.values(spot));
+
     let { name, city, state, country, Owner: owner, price, avgStarRating, description, numReviews } = spot;
     avgStarRating = Math.round(avgStarRating * 100) / 100;
     let firstName, lastName;
@@ -44,11 +44,13 @@ export default function SpotDetails() {
     let hiddenClassName = user ? "" : "hidden"
 
     if (user && (user.id === spot.ownerId || userSpotReviews.length)) {
+        console.log("hi");
+        console.log(userSpotReviews);
         hiddenClassName = "hidden"
     }
 
     if (loading) return <></>
-    console.log("loading?");
+
     return (
         <div id="details-container">
             <h2>{name}</h2>

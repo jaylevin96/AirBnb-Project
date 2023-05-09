@@ -21,9 +21,9 @@ export default function SpotReviews({ spotId }) {
             {spotReviews.reverse().map((review) => {
 
 
-                return (<div className="review-post">
+                return (<div key={review.id} className="review-post">
 
-                    <ReviewDetail key={review.id} reviewId={review.id} spotId={spotId} />
+                    <ReviewDetail reviewId={review.id} spotId={spotId} />
                 </div>)
             })}
 

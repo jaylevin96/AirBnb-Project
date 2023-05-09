@@ -5,7 +5,8 @@ import { useHistory } from "react-router-dom";
 
 export default function SpotContainer({ spot }) {
     const history = useHistory();
-
+    let rating = Math.round(spot.avgRating * 100) / 100;
+    if (!rating) rating = "New"
     return (
         <div title={spot.name} className="tile"
             onClick={() => {
@@ -23,7 +24,7 @@ export default function SpotContainer({ spot }) {
                 <span className="tile-content-review">
                     <i className="fa-solid fa-star"></i>
 
-                    {spot.avgRating}</span>
+                    {rating}</span>
 
             </div>
 
