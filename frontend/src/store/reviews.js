@@ -9,19 +9,19 @@ export function getReviews(data) {
     }
 }
 
-export function postReview(id, data) {
+export function postReview(data) {
     return {
         type: POSTREVIEW,
-        data,
-        id
+        data
+
     }
 }
 
 export const getReviewsThunk = (id) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${id}/reviews`)
-
     const data = await response.json()
     dispatch(getReviews(data))
+
     return data;
 }
 
@@ -32,7 +32,7 @@ export const postReviewsThunk = (id, body) => async dispatch => {
         body: JSON.stringify(body)
     })
     const data = await response.json();
-    dispatch(postReview(id, data))
+    dispatch(postReview(data))
     return data;
 }
 
@@ -43,6 +43,7 @@ export default function reviewsReducer(state = initialState, action) {
         case GETREVIEWSBYSPOT:
             newState = Object.assign({}, state)
             newState.spot = { ...newState.spot }
+            newState.spot.User = { ...newState.spot.User }
             action.data.Reviews.forEach((review) => {
                 newState.spot[review.id] = review;
             })
@@ -50,8 +51,9 @@ export default function reviewsReducer(state = initialState, action) {
         case POSTREVIEW:
             newState = Object.assign({}, state)
             newState.spot = { ...newState.spot }
+            newState.spot.User = { ...newState.spot.User }
 
-            newState.spot[action.id] = action.data;
+            newState.spot[action.data.id] = action.data;
             return newState;
 
         default:
