@@ -1,0 +1,15 @@
+.modal-delete-buttons {
+  margin: 0;
+  width: 35%;
+  height: 30px;
+}
+#delete-modal-buttons-container {
+  display: flex;
+  justify-content: center;
+  column-gap: 2em;
+  margin-top: 2em;
+}
+
+#confirm-delete-text {
+  text-align: center;
+}

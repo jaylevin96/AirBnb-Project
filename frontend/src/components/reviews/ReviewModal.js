@@ -40,6 +40,7 @@ export default function ReviewModal() {
                         setStars(5)
                     }}
                 ></i>
+                <span> Stars</span>
 
             </div>
             <button
