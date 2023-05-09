@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
 import { createSpotThunk, createSpotImageThunk, editSpotThunk } from '../../store/spots';
+import "./spotForm.css"
 export default function CreateSpot({ spot, form }) {
     const dispatch = useDispatch();
     const history = useHistory();
@@ -70,7 +71,7 @@ export default function CreateSpot({ spot, form }) {
         if (price < 1) errors.price = "Price is required"
         if (!previewImage.length) errors.preview = "Preview image is required"
         let endings = ['.png', '.jpg', '.jpeg']
-        if (!endings.includes(previewImage.slice(-5))) errors.preview = "Preview image URL must end in .png, .jpg, or .jpeg"
+        if (previewImage.length && !endings.includes(previewImage.slice(-5))) errors.preview = "Preview image URL must end in .png, .jpg, or .jpeg"
         if (image1.length && !endings.includes(image1.slice(-5))) errors.image1 = "Image URL must end in .png, .jpg, or .jpeg"
         if (image2.length && !endings.includes(image2.slice(-5))) errors.image2 = "Image URL must end in .png, .jpg, or .jpeg"
         if (image3.length && !endings.includes(image3.slice(-5))) errors.image3 = "Image URL must end in .png, .jpg, or .jpeg"
@@ -102,7 +103,7 @@ export default function CreateSpot({ spot, form }) {
         }
     }
 
-    return (<>
+    return (<div id="form-container">
         <h2>Create a New Spot</h2>
         <h3>Where's your place located?</h3>
         <p>Guests will only get your exact address once they booked a reservation.</p>
@@ -110,39 +111,41 @@ export default function CreateSpot({ spot, form }) {
             <label>
                 Country
                 {submitAttempt && (<span className="form-error">{validationErrors.country}</span>)}
-                <input type="text"
-                    value={country}
-                    onChange={(e) => setCountry(e.target.value)}></input>
+
             </label>
+            <input type="text"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}></input>
             <label>Street address
                 {submitAttempt && (<span className="form-error">{validationErrors.address}</span>)}
-                <input type="text"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}></input>
+
             </label>
+            <input type="text"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}></input>
             <label>
                 City
                 {submitAttempt && (<span className="form-error">{validationErrors.city}</span>)}
-                <input type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                ></input>
             </label>
+            <input type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+            ></input>
             <label>State
                 {submitAttempt && (<span className="form-error">{validationErrors.state}</span>)}
-                <input type="text"
-                    value={state}
-                    onChange={(e) => setState(e.target.value)}></input>
             </label>
+            <input type="text"
+                value={state}
+                onChange={(e) => setState(e.target.value)}></input>
             <h3>Describe your place to guests</h3>
             <p>Mention the best features of your space, any special amenities like fast wifi or parking, and what you love about the neighborhood.</p>
 
-            <input type="text" placeholder="Please write at least 30 characters."
+            <textarea placeholder="Please write at least 30 characters."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
 
-            ></input>
-            {submitAttempt && (<span className="form-error">{validationErrors.description}</span>)}
+            ></textarea>
+            {submitAttempt && (<span className="form-error bottom">{validationErrors.description}</span>)}
 
             <h3>Create a title for your spot</h3>
             <p>Catch guests' attention with a spot title that highlights what makes your place special.</p>
@@ -150,7 +153,7 @@ export default function CreateSpot({ spot, form }) {
             <input type="text" placeholder="Name of your spot"
                 value={name}
                 onChange={(e) => setName(e.target.value)}></input>
-            {submitAttempt && (<span className="form-error">{validationErrors.name}</span>)}
+            {submitAttempt && (<span className="form-error bottom">{validationErrors.name}</span>)}
 
             <h3>Set a base price for your spot</h3>
             <p>Competitive pricing can help your listing stand out and rank higher in search results</p>
@@ -158,7 +161,7 @@ export default function CreateSpot({ spot, form }) {
             <input type="number" placeholder="Price per night (USD)"
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}></input>
-            {submitAttempt && (<span className="form-error">{validationErrors.price}</span>)}
+            {submitAttempt && (<span className="form-error bottom">{validationErrors.price}</span>)}
 
             <h3>Liven up your spot with photos</h3>
             <p>Submit a link to at least one photo to publish your spot.</p>
@@ -167,29 +170,29 @@ export default function CreateSpot({ spot, form }) {
                 value={previewImage}
                 onChange={(e) => setPreviewImage(e.target.value)}
             ></input>
-            {submitAttempt && (<span className="form-error">{validationErrors.preview}</span>)}
+            {submitAttempt && (<span className="form-error bottom">{validationErrors.preview}</span>)}
 
             <input type="url" placeholder="Image URL"
                 value={image1}
                 onChange={(e) => setImage1(e.target.value)}
             ></input>
-            {submitAttempt && (<span className="form-error">{validationErrors.image1}</span>)}
+            {submitAttempt && (<span className="form-error bottom">{validationErrors.image1}</span>)}
             <input type="url" placeholder="Image URL"
                 value={image2}
                 onChange={(e) => setImage2(e.target.value)}></input>
-            {submitAttempt && (<span className="form-error">{validationErrors.image2}</span>)}
+            {submitAttempt && (<span className="form-error bottom">{validationErrors.image2}</span>)}
             <input type="url" placeholder="Image URL"
                 value={image3}
                 onChange={(e) => setImage3(e.target.value)}></input>
-            {submitAttempt && (<span className="form-error">{validationErrors.image3}</span>)}
+            {submitAttempt && (<span className="form-error bottom">{validationErrors.image3}</span>)}
             <input type="url" placeholder="Image URL"
                 value={image4}
                 onChange={(e) => setImage4(e.target.value)}></input>
-            {submitAttempt && (<span className="form-error">{validationErrors.image4}</span>)}
+            {submitAttempt && (<span className="form-error bottom">{validationErrors.image4}</span>)}
             <button type="submit">{`${form ? 'Update Spot' : 'Create Spot'}`}</button>
 
         </form>
-    </>)
+    </div>)
 
 
 }
