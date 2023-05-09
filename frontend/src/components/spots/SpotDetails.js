@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import { getSpotDetailsThunk } from '../../store/spots';
@@ -14,18 +14,20 @@ export default function SpotDetails() {
     const dispatch = useDispatch();
     let spot = useSelector((state) => state.spots.singleSpot)
     let user = useSelector((state) => state.session.user)
+    const [loading, setLoading] = useState(true)
 
     // let spot = spots.singleSpot;
     useEffect(() => {
-        dispatch(getSpotDetailsThunk(spotId))
+        dispatch(getSpotDetailsThunk(spotId)).then(() => setLoading(false))
         dispatch(getReviewsThunk(spotId))
+
     }, [dispatch, spotId])
     // let spot = spots.find((spot) => spot.id === spotId)
     // console.log("SPOT", spot);
     if (Object.values(spot).length < 2) return (<></>)
     console.log("SPOT", Object.values(spot));
-    const { name, city, state, country, Owner: owner, price, avgStarRating, description, numReviews } = spot;
-
+    let { name, city, state, country, Owner: owner, price, avgStarRating, description, numReviews } = spot;
+    avgStarRating = Math.round(avgStarRating * 100) / 100;
     let firstName, lastName;
 
     if (owner) {
@@ -42,6 +44,8 @@ export default function SpotDetails() {
         hiddenClassName = "hidden"
     }
 
+    if (loading) return <></>
+    console.log("loading?");
     return (
         <>
             <h2>{name}</h2>

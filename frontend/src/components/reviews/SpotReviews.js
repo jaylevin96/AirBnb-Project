@@ -7,7 +7,6 @@ import ReviewDetail from "./ReviewDetail";
 export default function SpotReviews({ spotId }) {
     const dispatch = useDispatch();
     const reviews = Object.values(useSelector((state) => state.reviews.spot))
-    console.log("REVIEWS RERENDERS", reviews);
     const spotReviews = reviews.filter((review) => review.spotId === spotId)
     useEffect(() => {
         dispatch(getReviewsThunk(spotId))
