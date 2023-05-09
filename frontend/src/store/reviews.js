@@ -31,7 +31,7 @@ export const postReviewsThunk = (id, body) => async dispatch => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
     })
-    const data = response.json();
+    const data = await response.json();
     dispatch(postReview(id, data))
     return data;
 }
@@ -50,6 +50,7 @@ export default function reviewsReducer(state = initialState, action) {
         case POSTREVIEW:
             newState = Object.assign({}, state)
             newState.spot = { ...newState.spot }
+
             newState.spot[action.id] = action.data;
             return newState;
 

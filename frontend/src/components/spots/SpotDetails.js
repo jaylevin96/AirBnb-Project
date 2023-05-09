@@ -6,6 +6,7 @@ import SpotReviews from '../reviews/SpotReviews';
 import './spotDetails.css';
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import ReviewModal from '../reviews/ReviewModal';
+import { getReviewsThunk } from '../../store/reviews';
 export default function SpotDetails() {
     const params = useParams();
     let { spotId } = params;
@@ -13,9 +14,11 @@ export default function SpotDetails() {
     const dispatch = useDispatch();
     let spot = useSelector((state) => state.spots.singleSpot)
     let user = useSelector((state) => state.session.user)
+
     // let spot = spots.singleSpot;
     useEffect(() => {
         dispatch(getSpotDetailsThunk(spotId))
+        dispatch(getReviewsThunk(spotId))
     }, [dispatch, spotId])
     // let spot = spots.find((spot) => spot.id === spotId)
     // console.log("SPOT", spot);

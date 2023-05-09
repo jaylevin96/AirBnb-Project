@@ -6,8 +6,9 @@ import ReviewDetail from "./ReviewDetail";
 
 export default function SpotReviews({ spotId }) {
     const dispatch = useDispatch();
-    const spotReviews = Object.values(useSelector((state) => state.reviews.spot))
-    // const spotReviews = reviews.filter((review) => review.spotId === spotId)
+    const reviews = Object.values(useSelector((state) => state.reviews.spot))
+
+    const spotReviews = reviews.filter((review) => review.spotId === spotId)
     useEffect(() => {
         dispatch(getReviewsThunk(spotId))
     }, [dispatch])
@@ -21,7 +22,7 @@ export default function SpotReviews({ spotId }) {
             {spotReviews.map((review) => {
 
 
-                return <ReviewDetail key={review.id} review={review} />
+                return <ReviewDetail key={review.id} review={review.id} />
             })}
 
         </>
