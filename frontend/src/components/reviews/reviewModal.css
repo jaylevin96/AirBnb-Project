@@ -1,0 +1,26 @@
+#container {
+  padding: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+}
+h1 {
+  padding: 1em;
+}
+#container textarea {
+  margin: auto;
+  height: 100px;
+  width: 90%;
+  margin-bottom: 2em;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.stars {
+  margin-bottom: 1em;
+}
+
+#container button {
+  width: 60%;
+}
