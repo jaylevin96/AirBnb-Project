@@ -9,6 +9,7 @@
   /* margin: 0 3em 0 1em; */
   /* width: 98%; */
 }
+
 .images div img {
   object-fit: cover;
   width: 100%;
@@ -47,6 +48,7 @@ h2 + span {
 }
 .reserve-button button {
   width: 90%;
+  height: 30px;
   margin: 1em auto;
   color: white;
   font-weight: 500;
@@ -88,4 +90,8 @@ h2 + span {
 
 .review-timestamp {
   color: gray;
+}
+
+#post-review-button {
+  list-style-type: none;
 }
