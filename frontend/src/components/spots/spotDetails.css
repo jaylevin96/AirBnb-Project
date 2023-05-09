@@ -63,6 +63,7 @@ h2 + span {
   color: white;
   font-weight: 500;
   background-color: #ff5a5f;
+  box-shadow: 2px 2px 1px black;
 }
 #info-grid {
   display: grid;
@@ -106,10 +107,15 @@ h2 + span {
   color: white;
   margin-top: 1em;
   background-color: rgb(77, 75, 75);
+  box-shadow: 2px 2px 1px black;
 }
 
 #post-review-button {
   list-style-type: none;
+  background-color: rgb(77, 75, 75);
+  box-shadow: 2px 2px 1px black;
+  color: white;
+  font-weight: 600;
 }
 
 #span-review-summary {

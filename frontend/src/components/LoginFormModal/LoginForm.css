@@ -46,12 +46,13 @@ label {
   font-weight: 500;
   font-size: larger;
   color: gray;
-  box-shadow: 3px 3px 0px gray;
+  box-shadow: 2px 2px 1px gray;
 }
 
 #container .submit.styled {
   color: white;
   background-color: #ff5a5f;
+  box-shadow: 2px 2px 1px black;
 }
 
 #demo {

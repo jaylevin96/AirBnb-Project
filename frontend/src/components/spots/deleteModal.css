@@ -7,6 +7,7 @@
 #delete.modal-delete-buttons {
   color: white;
   background-color: #ff5a5f;
+  box-shadow: 2px 2px 1px black;
   font-weight: 500;
   font-size: 13pt;
 }
@@ -15,6 +16,7 @@
   font-weight: 500;
   font-size: 13pt;
   background-color: rgb(77, 75, 75);
+  box-shadow: 2px 2px 1px black;
 }
 
 #delete-modal-buttons-container {

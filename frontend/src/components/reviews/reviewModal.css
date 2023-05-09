@@ -4,12 +4,13 @@
   align-items: center;
   border-radius: 10px;
 }
-h1 {
-  padding: 1em;
+#container h1 {
+  margin-bottom: 1em;
 }
+
 #container textarea {
   margin: auto;
-  height: 100px;
+  height: 150px;
   width: 90%;
   margin-bottom: 2em;
   padding-top: 0;
@@ -21,5 +22,16 @@ h1 {
 }
 
 #container button {
-  width: 60%;
+  width: 75%;
+  height: 50px;
+  background-color: white;
+  font-weight: 500;
+  font-size: larger;
+  color: gray;
+  box-shadow: 2px 2px 1px gray;
+}
+#container button.canSubmit {
+  color: white;
+  background-color: #ff5a5f;
+  box-shadow: 2px 2px 1px black;
 }

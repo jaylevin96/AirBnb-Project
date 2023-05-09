@@ -70,6 +70,10 @@
   margin: 0;
   width: 40%;
   height: 20px;
+  background-color: rgb(77, 75, 75);
+  color: white;
+  font-weight: 600;
+  box-shadow: 2px 2px 1px black;
 }
 
 #manage-buttons-container {

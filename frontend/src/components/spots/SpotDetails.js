@@ -109,7 +109,7 @@ export default function SpotDetails() {
                 </span>
 
                 <button id="post-review-button" className={hiddenClassName}>
-                    <OpenModalMenuItem itemText="Post your review"
+                    <OpenModalMenuItem itemText="Post Your Review"
                         modalComponent={<ReviewModal />} />
 
                 </button>

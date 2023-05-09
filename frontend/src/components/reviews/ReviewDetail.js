@@ -14,7 +14,8 @@ export default function ReviewDetail({ reviewId, spotId }) {
     if (!reviews.length) return <></>
     const reviewRecord = reviews.find((review) => review.id === reviewId)
     const { review, stars, User, createdAt } = reviewRecord;
-    const userIsReviewOwner = reviewRecord.userId === user.id;
+    let userIsReviewOwner;
+    if (user) userIsReviewOwner = reviewRecord.userId === user.id;
     const deleteButtonClass = userIsReviewOwner ? "" : "hidden";
     let firstName;
     if (User) {

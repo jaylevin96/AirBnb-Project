@@ -10,7 +10,7 @@ export default function ReviewModal() {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
     const spot = useSelector((state) => state.spots.singleSpot)
-
+    const disabled = stars < 1 || review.length < 10
     return (
         <div id="container">
             <h1>How was your stay?</h1>
@@ -44,11 +44,11 @@ export default function ReviewModal() {
                 <span> Stars</span>
 
             </div>
-            <button
+            <button className={disabled ? "" : "canSubmit"}
                 onClick={() => {
                     dispatch(postReviewsThunk(spot.id, { review, stars })).then(() => { dispatch(getSpotDetailsThunk(spot.id)) }).then(closeModal)
                 }}
-                disabled={stars < 1 || review.length < 10}
+                disabled={disabled}
             >Submit Your Review</button>
         </div>
     )
