@@ -3,9 +3,13 @@
   width: max-content;
   padding: 0;
   position: absolute;
-  top: 3em;
+  top: 2em;
+
+  /* left: 1.8em; */
   border: 1pt solid gray;
+  box-shadow: 2px 2px 1px gray;
 }
+
 #profileButton {
   width: 50px;
   height: 30px;
@@ -16,6 +20,7 @@
 #profile-menu {
   display: flex;
   column-gap: 2em;
+  position: relative;
   /* flex-direction: column; */
   align-items: center;
   align-content: center;
@@ -36,6 +41,21 @@
   text-align: center;
   padding: 1em;
   cursor: pointer;
+}
+#li-username {
+  padding-bottom: 0;
+}
+#li-email {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-bottom: 1pt solid gray;
+}
+#li-manage-spots {
+  border-bottom: 1pt solid gray;
+}
+#li-manage-spots a {
+  color: black;
+  font-weight: normal;
 }
 .navBar {
   display: flex;
@@ -71,4 +91,13 @@
   cursor: pointer;
   font-weight: 800;
   color: #ff5a5f;
+}
+
+#profile-logout {
+  border-radius: 25px;
+  padding: 0.5em 1em;
+  color: white;
+  background-color: rgb(77, 75, 75);
+  box-shadow: 2px 2px 1px black;
+  cursor: pointer;
 }

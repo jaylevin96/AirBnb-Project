@@ -6,4 +6,23 @@
   font-weight: 500;
   font-size: larger;
   background-color: #ff5a5f;
+  box-shadow: 2px 2px 1px gray;
+}
+
+#signup-button.disabled {
+  background-color: rgb(231, 225, 225);
+  color: rgb(104, 102, 102);
+}
+#signup-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#signup-form input {
+  width: 100%;
+}
+.signup-error {
+  color: red;
+  text-align: center;
+  /* position: absolute; */
 }

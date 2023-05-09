@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import * as sessionActions from '../../store/session';
 import OpenModalMenuItem from './OpenModalMenuItem';
 import LoginFormModal from '../LoginFormModal';
@@ -9,8 +9,10 @@ import SignupFormModal from '../SignupFormModal';
 
 
 
+
 function ProfileButton({ user }) {
     const dispatch = useDispatch();
+    const history = useHistory()
     const [showMenu, setShowMenu] = useState(false);
     const ulRef = useRef();
 
@@ -36,6 +38,7 @@ function ProfileButton({ user }) {
     const logout = (e) => {
         e.preventDefault();
         dispatch(sessionActions.removeSessionThunk());
+        history.push('/')
         closeMenu()
     };
 
@@ -50,11 +53,11 @@ function ProfileButton({ user }) {
             <ul className={ulClassName} ref={ulRef}>
                 {user ? (
                     <>
-                        <li>Hello, {user.username}</li>
-                        <li>{user.email}</li>
-                        <li><NavLink to='/spots/current'>Manage Spots</NavLink></li>
+                        <li id="li-username">Hello, {user.username}</li>
+                        <li id="li-email">{user.email}</li>
+                        <li id="li-manage-spots"><NavLink to='/spots/current'>Manage Spots</NavLink></li>
                         <li>
-                            <button onClick={logout}>Log Out</button>
+                            <button id="profile-logout" onClick={logout}>Log Out</button>
                         </li>
                     </>
                 ) : (
