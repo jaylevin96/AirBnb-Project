@@ -21,7 +21,10 @@ export default function SpotReviews({ spotId }) {
             {spotReviews.map((review) => {
 
 
-                return <ReviewDetail key={review.id} reviewId={review.id} spotId={spotId} />
+                return (<div className="review-post">
+
+                    <ReviewDetail key={review.id} reviewId={review.id} spotId={spotId} />
+                </div>)
             })}
 
         </>

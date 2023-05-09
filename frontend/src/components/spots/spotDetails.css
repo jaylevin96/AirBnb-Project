@@ -77,3 +77,7 @@ h2 + span {
 .reviews-container {
   margin-left: 16px;
 }
+
+.review-post {
+  margin: 2em 0;
+}
