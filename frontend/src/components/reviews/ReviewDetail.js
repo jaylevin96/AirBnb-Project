@@ -13,7 +13,9 @@ export default function ReviewDetail({ reviewId, spotId }) {
     let user = useSelector((state) => state.session.user)
     if (!reviews.length) return <></>
     const reviewRecord = reviews.find((review) => review.id === reviewId)
-    const { review, stars, User, createdAt } = reviewRecord;
+    let { review, stars, User, createdAt } = reviewRecord;
+    stars = new Array(stars).fill('');
+    console.log(stars);
     let userIsReviewOwner;
     if (user) userIsReviewOwner = reviewRecord.userId === user.id;
     const deleteButtonClass = userIsReviewOwner ? "" : "hidden";
@@ -40,8 +42,12 @@ export default function ReviewDetail({ reviewId, spotId }) {
     return (
         <div>
             <h4>{firstName}</h4>
+
             <span className="review-timestamp">{`${months[month]} ${year}  `}</span>
-            <span>{`${stars} stars`}</span>
+            {stars.map((star, index) => {
+                return <span key={`star${index}`}><i className="fa-solid fa-star fa-lg review-stars"></i></span>
+            })}
+            {/* <span>{`${stars} stars`}</span> */}
             <p>{review}</p>
             <button id="review-delete-button" className={deleteButtonClass}>
                 <OpenModalMenuItem itemText="Delete"

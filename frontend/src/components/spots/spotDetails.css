@@ -127,3 +127,7 @@ h2 + span {
 #span-review-summary span {
   margin: 0;
 }
+.review-stars {
+  font-size: 9pt;
+  color: #ff5a5f;
+}

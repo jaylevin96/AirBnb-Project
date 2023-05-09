@@ -44,20 +44,24 @@ export default function LoginFormModal() {
             <h1>Log In</h1>
             {errors.credential && <p id="errors-message">The provided credentials were invalid.</p>}
             <form onSubmit={onSubmit}>
-                <label>Username or Email
-                    <input type="text"
-                        value={credential}
-                        onChange={(e) => setCredential(e.target.value)}
-                        required
-                    ></input>
+                <label>Username or email
+
                 </label>
-                <label>Password
-                    <input type="password"
-                        value={password}
-                        onChange={(e) => { setPassword(e.target.value) }}
-                        required
-                    ></input>
+                <input type="text"
+                    value={credential}
+                    onChange={(e) => setCredential(e.target.value)}
+                    required
+                ></input>
+                <label
+                    style={{ marginTop: "2em" }}
+                >Password
+
                 </label>
+                <input type="password"
+                    value={password}
+                    onChange={(e) => { setPassword(e.target.value) }}
+                    required
+                ></input>
                 <button className={disabled ? "submit" : "submit styled"} type="submit"
                     // disabled={() => {
                     //     if (credential.length < 4 || password.length < 6) return true;

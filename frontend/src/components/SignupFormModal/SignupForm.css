@@ -22,7 +22,7 @@
   width: 100%;
 }
 .signup-error {
-  color: red;
+  color: #ff5a5f;
   text-align: center;
   /* position: absolute; */
 }

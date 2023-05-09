@@ -33,6 +33,7 @@ function SignupFormModal() {
                 .catch(async (res) => {
                     const data = await res.json();
                     if (data && data.errors) {
+                        console.log(data.errors);
                         setErrors(data.errors);
                     }
                 });
@@ -83,7 +84,7 @@ function SignupFormModal() {
                     onChange={(e) => setLastName(e.target.value)}
                     required
                 />
-                {errors.lastName && <p>{errors.lastName}</p>}
+                {errors.lastName && <p className="signup-error">{errors.lastName}</p>}
                 <label>
                     Email
 
@@ -94,7 +95,7 @@ function SignupFormModal() {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
-                {errors.email && <p>{errors.email}</p>}
+                {errors.email && <p className="signup-error">{errors.email}</p>}
                 <label>
                     Username
 
@@ -120,7 +121,7 @@ function SignupFormModal() {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                {errors.password && <p>{errors.password}</p>}
+                {errors.password && <p className="signup-error">{errors.password}</p>}
                 <label>
                     Confirm Password
 

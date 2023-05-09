@@ -77,11 +77,11 @@ export default function SpotDetails() {
                 <div className='reserve-button'>
                     <span id="reserve-price">{`$${price}`}<span> night</span></span>
                     {numReviews > 0 && (<span>
-                        <i className="fa-solid fa-star"></i>
+                        <i style={{ color: "#ff5a5f" }} className="fa-solid fa-star"></i>
                         {avgStarRating.toFixed(2)}
                     </span>)}
 
-                    {!numReviews && (<span>  <i className="fa-solid fa-star"></i>New</span>)}
+                    {!numReviews && (<span>  <i className="fa-solid fa-star" style={{ color: "#ff5a5f" }}></i>New</span>)}
                     {numReviews > 0 && (<span>{numReviews} {numReviews < 2 ? "review" : "reviews"}</span>)}
                     {/* <span>{`${numReviews ? `${numReviews} reviews` : "New"}`}</span> */}
                     <button>Reserve</button>
@@ -90,7 +90,8 @@ export default function SpotDetails() {
             <div id="review-summary">
                 <span id="span-review-summary">
                     <span>
-                        <i className="fa-solid fa-star fa-lg"></i>
+                        <i className="fa-solid fa-star fa-lg"
+                            style={{ color: "#ff5a5f" }}></i>
                         {!numReviews && (<span>New</span>)}
                         {(numReviews > 0) && (
                             <span>{avgStarRating.toFixed(2)}</span>

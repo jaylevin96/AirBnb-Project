@@ -23,7 +23,7 @@ export default function SpotContainer({ spot }) {
                     ${spot.price} night
                 </span>
                 <span className="tile-content-review">
-                    <i className="fa-solid fa-star"></i>
+                    <i style={{ color: "#ff5a5f" }} className="fa-solid fa-star"></i>
 
                     {rating}</span>
 

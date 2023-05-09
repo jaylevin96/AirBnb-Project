@@ -20,7 +20,7 @@
 .form-error {
   margin: 0;
   /* margin-right: 10em; */
-  color: red;
+  color: #ff5a5f;
   font-size: smaller;
 }
 .form-error.bottom {
