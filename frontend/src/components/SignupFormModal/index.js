@@ -45,8 +45,10 @@ function SignupFormModal() {
 
     function isDisabled() {
         let inputs = [email, username, firstName, lastName, password, confirmPassword];
+        if (username.length < 4 || password.length < 6) return true;
         for (let input of inputs) {
             if (!input.length) return true;
+
         }
         return false;
     }

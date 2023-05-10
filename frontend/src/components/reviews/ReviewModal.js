@@ -7,6 +7,7 @@ import "./reviewModal.css"
 export default function ReviewModal() {
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(0)
+    const [errors, setErrors] = useState({})
     const dispatch = useDispatch();
     const { closeModal } = useModal();
     const spot = useSelector((state) => state.spots.singleSpot)
@@ -14,6 +15,7 @@ export default function ReviewModal() {
     return (
         <div id="container">
             <h1>How was your stay?</h1>
+            {errors.message && <p style={{ color: "#ff5a5f" }} id="errors-message">{errors.message}</p>}
             <textarea placeholder="Leave your review here..."
                 value={review}
 
@@ -53,7 +55,15 @@ export default function ReviewModal() {
             </div>
             <button className={disabled ? "" : "canSubmit"}
                 onClick={() => {
-                    dispatch(postReviewsThunk(spot.id, { review, stars })).then(() => { dispatch(getSpotDetailsThunk(spot.id)) }).then(closeModal)
+                    dispatch(postReviewsThunk(spot.id, { review, stars })).then(() => { dispatch(getSpotDetailsThunk(spot.id)) }).then(closeModal).catch(async (res) => {
+                        const data = await res.json();
+                        if (data && data.serrors) {
+                            setErrors(data.errors)
+                        }
+                        if (data.message) {
+                            setErrors(data.message)
+                        }
+                    })
                 }}
                 disabled={disabled}
             >Submit Your Review</button>
