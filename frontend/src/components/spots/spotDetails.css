@@ -144,7 +144,7 @@ h2 + span {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  column-gap: 0.5em;
+  /* column-gap: 0.5em; */
 }
 #span-review-summary span {
   margin: 0;

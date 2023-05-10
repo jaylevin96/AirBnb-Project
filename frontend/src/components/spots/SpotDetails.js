@@ -84,7 +84,12 @@ export default function SpotDetails() {
                     {!numReviews && (<span>  <i className="fa-solid fa-star" style={{ color: "#ff5a5f" }}></i>New</span>)}
                     {numReviews > 0 && (<span>{numReviews} {numReviews < 2 ? "review" : "reviews"}</span>)}
                     {/* <span>{`${numReviews ? `${numReviews} reviews` : "New"}`}</span> */}
-                    <button>Reserve</button>
+                    <button
+                        onClick={() => {
+                            alert("Feature coming soon!")
+                        }}
+
+                    >Reserve</button>
                 </div>
             </div>
             <div id="review-summary">
@@ -96,7 +101,7 @@ export default function SpotDetails() {
                         {(numReviews > 0) && (
                             <>
                                 <span>{avgStarRating.toFixed(2)}</span>
-                                <span style={{ fontSize: "25pt", margin: "0 .5em" }}>·</span>
+                                <span style={{ fontSize: "25pt", margin: "0 .3em" }}>·</span>
                             </>
                         )}
                     </span>
