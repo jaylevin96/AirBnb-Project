@@ -9,11 +9,13 @@
 
 ## Welcome!
 
-Welcome to my first deployed fullstack web application. As a student at App Academy, my first two projects were designed to test my new skills as a fullstack web developer.
+Welcome to my first deployed fullstack web application. As a student at App Academy, my first project was designed to test my new skills as a fullstack web developer.
 
 This project is a clone of Airbnb, where I have developed a full backend using Express to create my API routes and Sequelize to access my PostgreSQL database that is hosted on Render. The backend supports everything from user authentication and management of related spot/bookings/review data.
 
 In order to develop the frontend, I leveraged React/Redux to build out my application and vanilla CSS to style. This was my first time using both of these tools so it was a great learning experience to flex my new skills and gain a little insight into the power of these libraries.
+
+Currently, the frontend supports user authentication, and spot/review management. In the future I'd like to continue developing this site by creating booking functionality (backend is already developed to support this) and looking into different ways to host the images.
 
 Below you will see some images of the frontend and some backend documenation about my database and API endpoints.
 
