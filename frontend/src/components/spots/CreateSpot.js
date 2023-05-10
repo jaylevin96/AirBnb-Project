@@ -14,7 +14,7 @@ export default function CreateSpot({ spot, form }) {
     const [state, setState] = useState('');
     const [description, setDescription] = useState('');
     const [name, setName] = useState('');
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState('');
     const [previewImage, setPreviewImage] = useState('');
     const [image1, setImage1] = useState('')
     const [image2, setImage2] = useState('')
@@ -71,11 +71,11 @@ export default function CreateSpot({ spot, form }) {
         if (price < 1) errors.price = "Price is required"
         if (!previewImage.length) errors.preview = "Preview image is required"
         let endings = ['.png', '.jpg', '.jpeg']
-        if (previewImage.length && !endings.includes(previewImage.slice(-5))) errors.preview = "Preview image URL must end in .png, .jpg, or .jpeg"
-        if (image1.length && !endings.includes(image1.slice(-5))) errors.image1 = "Image URL must end in .png, .jpg, or .jpeg"
-        if (image2.length && !endings.includes(image2.slice(-5))) errors.image2 = "Image URL must end in .png, .jpg, or .jpeg"
-        if (image3.length && !endings.includes(image3.slice(-5))) errors.image3 = "Image URL must end in .png, .jpg, or .jpeg"
-        if (image4.length && !endings.includes(image4.slice(-5))) errors.image4 = "Image URL must end in .png, .jpg, or .jpeg"
+        if (previewImage.length && !endings.includes(previewImage.slice(previewImage.lastIndexOf('.')))) errors.preview = "Preview image URL must end in .png, .jpg, or .jpeg"
+        if (image1.length && !endings.includes(image1.slice(image1.lastIndexOf('.')))) errors.image1 = "Image URL must end in .png, .jpg, or .jpeg"
+        if (image2.length && !endings.includes(image2.slice(image2.lastIndexOf('.')))) errors.image2 = "Image URL must end in .png, .jpg, or .jpeg"
+        if (image3.length && !endings.includes(image3.slice(image3.lastIndexOf('.')))) errors.image3 = "Image URL must end in .png, .jpg, or .jpeg"
+        if (image4.length && !endings.includes(image4.slice(image4.lastIndexOf('.')))) errors.image4 = "Image URL must end in .png, .jpg, or .jpeg"
         setValidationErrors(errors)
 
 
@@ -97,7 +97,9 @@ export default function CreateSpot({ spot, form }) {
             dispatch(createSpotImageThunk(newSpot.id, { url: previewImage, preview: true }))
             const images = [image1, image2, image3, image4]
             images.forEach((image) => {
-                dispatch(createSpotImageThunk(newSpot.id, { url: image, preview: false }))
+                if (image) {
+                    dispatch(createSpotImageThunk(newSpot.id, { url: image, preview: false }))
+                }
             })
             history.push(`/spots/${newSpot.id}`)
         }

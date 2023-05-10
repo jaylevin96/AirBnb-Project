@@ -7,11 +7,12 @@
   grid-template-areas:
     "preview preview 1 2"
     "preview preview 3 4";
-  row-gap: 0.5em;
-  column-gap: 0.5em;
+  row-gap: 0.35em;
+  column-gap: 0.35em;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   padding: 0 0.5em;
+  margin-top: 0.5em;
   /* margin: 0 3em 0 1em; */
   /* width: 98%; */
 }
@@ -58,11 +59,13 @@
 h2,
 h2 + span {
   margin-left: 16px;
+  margin-bottom: 0.1em;
 }
 
 .reserve-button {
   border: 1pt solid black;
   border-radius: 10px;
+  margin-top: 1em;
   padding: 1em 0;
   display: flex;
   flex-wrap: wrap;
@@ -141,7 +144,7 @@ h2 + span {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  column-gap: 1.5em;
+  column-gap: 0.5em;
 }
 #span-review-summary span {
   margin: 0;

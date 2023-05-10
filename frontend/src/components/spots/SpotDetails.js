@@ -8,7 +8,6 @@ import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import ReviewModal from '../reviews/ReviewModal';
 import { getReviewsThunk } from '../../store/reviews';
 export default function SpotDetails() {
-    console.log("details re-rendered");
     const params = useParams();
     let { spotId } = params;
     spotId = Number(spotId)
@@ -44,9 +43,9 @@ export default function SpotDetails() {
     let hiddenClassName = user ? "" : "hidden"
 
     if (user && (user.id === spot.ownerId || userSpotReviews.length)) {
-        console.log("hi");
-        console.log(userSpotReviews);
-        hiddenClassName = "hidden"
+
+        hiddenClassName = "hidden";
+
     }
 
 
@@ -55,7 +54,8 @@ export default function SpotDetails() {
     return (
         <div id="details-container">
             <h2>{name}</h2>
-            <span>
+            <span
+            >
                 {`${city}, ${state}, ${country}`}
             </span>
             <div className='images'>
@@ -94,9 +94,13 @@ export default function SpotDetails() {
                             style={{ color: "#ff5a5f" }}></i>
                         {!numReviews && (<span>New</span>)}
                         {(numReviews > 0) && (
-                            <span>{avgStarRating.toFixed(2)}</span>
+                            <>
+                                <span>{avgStarRating.toFixed(2)}</span>
+                                <span style={{ fontSize: "25pt", margin: "0 .5em" }}>·</span>
+                            </>
                         )}
                     </span>
+
                     {(numReviews > 0) && (
                         <span>
                             <span>{`${numReviews} ${numReviews < 2 ? "review" : "reviews"}`}</span>
