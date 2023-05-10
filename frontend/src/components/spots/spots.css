@@ -54,6 +54,7 @@
 }
 .location {
   font-weight: 500;
+  width: 180px;
 }
 .tile-content-review {
   text-align: right;
