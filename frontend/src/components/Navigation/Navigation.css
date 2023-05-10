@@ -40,7 +40,6 @@
 .profile-dropdown li {
   text-align: center;
   padding: 1em;
-  cursor: pointer;
 }
 #li-username {
   padding-bottom: 0;
@@ -52,6 +51,10 @@
 }
 #li-manage-spots {
   border-bottom: 1pt solid gray;
+  width: 100%;
+  padding: 1em 0;
+  display: inline-block;
+  text-align: center;
 }
 #li-manage-spots a {
   color: black;

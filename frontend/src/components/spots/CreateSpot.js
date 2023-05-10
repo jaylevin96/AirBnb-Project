@@ -24,7 +24,8 @@ export default function CreateSpot({ spot, form }) {
     const [submitAttempt, setSubmitAttempt] = useState(false)
 
     useEffect(() => {
-        if (spot) {
+
+        if (spot && spot.id) {
             setAddress(spot.address)
             setCountry(spot.country)
             setCity(spot.city)
@@ -165,31 +166,35 @@ export default function CreateSpot({ spot, form }) {
                 onChange={(e) => setPrice(e.target.value)}></input>
             {submitAttempt && (<span className="form-error bottom">{validationErrors.price}</span>)}
 
-            <h3>Liven up your spot with photos</h3>
-            <p>Submit a link to at least one photo to publish your spot.</p>
 
-            <input type="url" placeholder="Preview Image URL"
-                value={previewImage}
-                onChange={(e) => setPreviewImage(e.target.value)}
-            ></input>
-            {submitAttempt && (<span className="form-error bottom">{validationErrors.preview}</span>)}
 
-            <input type="url" placeholder="Image URL"
-                value={image1}
-                onChange={(e) => setImage1(e.target.value)}
-            ></input>
-            {submitAttempt && (<span className="form-error bottom">{validationErrors.image1}</span>)}
-            <input type="url" placeholder="Image URL"
-                value={image2}
-                onChange={(e) => setImage2(e.target.value)}></input>
-            {submitAttempt && (<span className="form-error bottom">{validationErrors.image2}</span>)}
-            <input type="url" placeholder="Image URL"
-                value={image3}
-                onChange={(e) => setImage3(e.target.value)}></input>
-            {submitAttempt && (<span className="form-error bottom">{validationErrors.image3}</span>)}
-            <input type="url" placeholder="Image URL"
-                value={image4}
-                onChange={(e) => setImage4(e.target.value)}></input>
+            {!spot && (<>
+                <h3>Liven up your spot with photos</h3>
+                <p>Submit a link to at least one photo to publish your spot.</p>
+                <input type="url" placeholder="Preview Image URL"
+                    value={previewImage}
+                    onChange={(e) => setPreviewImage(e.target.value)}
+                ></input>
+                {submitAttempt && (<span className="form-error bottom">{validationErrors.preview}</span>)}
+
+                <input type="url" placeholder="Image URL"
+                    value={image1}
+                    onChange={(e) => setImage1(e.target.value)}
+                ></input>
+                {submitAttempt && (<span className="form-error bottom">{validationErrors.image1}</span>)}
+                <input type="url" placeholder="Image URL"
+                    value={image2}
+                    onChange={(e) => setImage2(e.target.value)}></input>
+                {submitAttempt && (<span className="form-error bottom">{validationErrors.image2}</span>)}
+                <input type="url" placeholder="Image URL"
+                    value={image3}
+                    onChange={(e) => setImage3(e.target.value)}></input>
+                {submitAttempt && (<span className="form-error bottom">{validationErrors.image3}</span>)}
+                <input type="url" placeholder="Image URL"
+                    value={image4}
+                    onChange={(e) => setImage4(e.target.value)}></input>
+            </>)}
+
             {submitAttempt && (<span className="form-error bottom">{validationErrors.image4}</span>)}
             <button type="submit">{`${form ? 'Update Spot' : 'Create Spot'}`}</button>
 
