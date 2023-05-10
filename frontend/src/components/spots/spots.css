@@ -14,10 +14,11 @@
   /* grid-template-columns: repeat(auto-fit, 240px); */
   /* width: 1024px; */
   margin: auto;
-  margin-left: 1em;
+  /* margin-left: 1em; */
   justify-content: flex-start;
   row-gap: 2em;
   column-gap: 1em;
+  width: fit-content;
 }
 
 .tile {
