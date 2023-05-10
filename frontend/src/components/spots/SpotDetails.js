@@ -126,7 +126,7 @@ export default function SpotDetails() {
 
             </div>
             <div className='reviews-container'>
-                <SpotReviews spotId={spotId} />
+                <SpotReviews spotId={spotId} hidden={hiddenClassName} />
 
             </div>
         </div>

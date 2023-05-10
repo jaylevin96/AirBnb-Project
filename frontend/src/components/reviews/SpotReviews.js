@@ -4,17 +4,17 @@ import { getReviewsThunk } from "../../store/reviews";
 import ReviewDetail from "./ReviewDetail";
 
 
-export default function SpotReviews({ spotId }) {
+export default function SpotReviews({ spotId, hidden }) {
     const dispatch = useDispatch();
     const reviews = Object.values(useSelector((state) => state.reviews.spot))
     const spotReviews = reviews.filter((review) => review.spotId === spotId)
     useEffect(() => {
         dispatch(getReviewsThunk(spotId))
     }, [dispatch])
-
-
+    if (!spotReviews.length && !hidden.length) {
+        return <h3>Be the first to post a review!</h3>
+    }
     if (!spotReviews) return (<></>)
-
     return (
         <>
 
