@@ -7,6 +7,32 @@
 <!-- # `<name of application here>` -->
 <!--!!END_ADD -->
 
+## Welcome!
+
+Welcome to my first deployed fullstack web application. As a student at App Academy, my first two projects were designed to test my new skills as a fullstack web developer.
+
+This project is a clone of Airbnb, where I have developed a full backend using Express to create my API routes and Sequelize to access my PostgreSQL database that is hosted on Render. The backend supports everything from user authentication and management of related spot/bookings/review data.
+
+In order to develop the frontend, I leveraged React/Redux to build out my application and vanilla CSS to style. This was my first time using both of these tools so it was a great learning experience to flex my new skills and gain a little insight into the power of these libraries.
+
+Below you will see some images of the frontend and some backend documenation about my database and API endpoints.
+
+The site is deployed live here: https://jays-airbnb.onrender.com/. Alternatively, you can run this locally by cloning my repo and running Node on both the backend and frontend. Make sure to install NPM dependencies in both prior to running the scripts NPM start.
+
+## Images of the Front end application
+
+### All Spots
+
+![Screenshot](/Assets/All%20Spots.png)
+
+### Spot Details
+
+![Screenshot](/Assets/Spot%20Details.png)
+
+### Create a New Spot
+
+![Screenshot](/Assets/Create%20a%20New%20Spot.png)
+
 ## Database Schema Design
 
 <!--!!START SILENT -->
