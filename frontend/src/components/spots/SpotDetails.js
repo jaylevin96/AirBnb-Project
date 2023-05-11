@@ -22,7 +22,14 @@ export default function SpotDetails() {
 
     // let spot = spots.singleSpot;
     useEffect(() => {
-        dispatch(getSpotDetailsThunk(spotId)).then(dispatch(getReviewsThunk(spotId))).then(() => setLoading(false))
+        const timeout = setTimeout(() => {
+            setLoading(false)
+        }, 500)
+        dispatch(getSpotDetailsThunk(spotId)).then(dispatch(getReviewsThunk(spotId)))
+        // .then(() => setLoading(false))
+
+
+        return () => clearTimeout(timeout);
     }, [dispatch, spotId])
     // let spot = spots.find((spot) => spot.id === spotId)
     // console.log("SPOT", spot);
