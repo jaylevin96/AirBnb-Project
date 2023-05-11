@@ -31,6 +31,9 @@ export default function BookingFormModal({ spot }) {
             error = error.errors;
             // console.log(error);
             let newErrors = {};
+            if (error.message = "Authentication required") {
+                newErrors.message = "You must be logged in to request a booking"
+            }
             if (error && error.endDate) {
                 newErrors.end = error.endDate;
 
@@ -40,7 +43,7 @@ export default function BookingFormModal({ spot }) {
                 newErrors.start = error.startDate;
             }
             if (!error) {
-                console.log("got here");
+
                 newErrors.message = "Sorry, you can not book a reservation for your own listing."
             }
             setValidationErrors(newErrors);

@@ -2,12 +2,19 @@ import { csrfFetch } from "./csrf"
 
 const GETBOOKINGS = '/spot/bookings'
 const CREATEBOOKING = '/spot/booking/new'
+const GETUSERBOOKINGS = '/booking/current'
 
 export function getBookings(data, id) {
     return {
         type: GETBOOKINGS,
         data,
         id
+    }
+}
+export function getUserBookings(data) {
+    return {
+        type: GETUSERBOOKINGS,
+        data
     }
 }
 export function createBooking(data, id) {
@@ -22,6 +29,12 @@ export const getSpotBookingsThunk = (id) => async dispatch => {
     const response = await csrfFetch(`/api/spots/${id}/bookings`)
     const data = await response.json()
     dispatch(getBookings(data, id))
+    return data;
+}
+export const getUserBookingsThunk = () => async dispatch => {
+    const response = await csrfFetch('/api/bookings/current')
+    const data = await response.json();
+    dispatch(getUserBookings(data))
     return data;
 }
 
@@ -56,6 +69,16 @@ export default function bookingsReducer(state = initialState, action) {
                 newState.spot[action.id] = booking;
             })
             return newState;
+        case GETUSERBOOKINGS:
+            newState = Object.assign({}, state);
+            newState.spot = { ...newState.spot }
+            newState.user = { ...newState.user }
+            action.data.Bookings.forEach(booking => {
+                newState.user[booking.id] = booking;
+            })
+            return newState;
+
+
         case CREATEBOOKING:
             newState = Object.assign({}, state);
             newState.spot = { ...newState.spot }
