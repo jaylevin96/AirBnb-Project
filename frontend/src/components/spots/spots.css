@@ -20,6 +20,11 @@
   column-gap: 1em;
   width: fit-content;
 }
+#manage-spots-grid {
+  /* width: fit-content */
+  margin-left: 2em;
+  /* flex-direction: column; */
+}
 
 .tile {
   width: 225px;

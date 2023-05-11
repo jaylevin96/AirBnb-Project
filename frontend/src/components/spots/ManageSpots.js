@@ -37,7 +37,7 @@ export default function ManageSpots() {
                     }}
                 >Create a New Spot</button>
             </div>
-            <div className="spots-grid">
+            <div id="manage-spots-grid" className="spots-grid">
                 {userSpots.map(spot => {
                     return (
                         <div id='manage-tile' key={spot.id}>
