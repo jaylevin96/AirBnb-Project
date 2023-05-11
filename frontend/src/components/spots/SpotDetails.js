@@ -7,6 +7,7 @@ import './spotDetails.css';
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import ReviewModal from '../reviews/ReviewModal';
 import { getReviewsThunk } from '../../store/reviews';
+import BookingFormModal from '../BookingFormModal';
 export default function SpotDetails() {
     const params = useParams();
     let { spotId } = params;
@@ -91,12 +92,19 @@ export default function SpotDetails() {
                     {!numReviews && (<span>  <i className="fa-solid fa-star" style={{ color: "#ff5a5f" }}></i>New</span>)}
                     {numReviews > 0 && (<span>{numReviews} {numReviews < 2 ? "review" : "reviews"}</span>)}
                     {/* <span>{`${numReviews ? `${numReviews} reviews` : "New"}`}</span> */}
-                    <button
-                        onClick={() => {
-                            alert("Feature coming soon!")
-                        }}
+                    <button>
 
-                    >Reserve</button>
+                        <OpenModalMenuItem
+                            itemText={"Reserve"}
+                            modalComponent={<BookingFormModal spot={spot} />} />
+
+                    </button>
+
+
+
+
+
+
                 </div>
             </div>
             <div id="review-summary">

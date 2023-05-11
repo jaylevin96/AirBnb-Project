@@ -1,0 +1,22 @@
+#booking-header,
+#booking-subheader {
+  text-align: center;
+  margin: 1em 0;
+}
+.booking-error {
+  color: #ff5a5f;
+  text-align: center;
+}
+
+#booking-form input {
+  margin-bottom: 1em;
+}
+
+#booking-form button {
+  color: white;
+  background-color: #ff5a5f;
+  box-shadow: 2px 2px 1px black;
+  height: 50px;
+  width: 75%;
+  font-weight: 500;
+}

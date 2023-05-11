@@ -7,6 +7,7 @@ import * as sessionActions from "./store/session"
 import Navigation from './components/Navigation/index'
 import AllSpots from "./components/spots";
 import SpotDetails from "./components/spots/SpotDetails"
+import UserBookings from "./components/BookingFormModal/bookings/UserBookings";
 import CreateSpot from "./components/spots/CreateSpot";
 import ManageSpots from "./components/spots/ManageSpots";
 import EditSpot from "./components/spots/EditSpot";
@@ -37,6 +38,9 @@ function App() {
             </Route>
             <Route path='/spots/:spotId/edit'>
               <EditSpot />
+            </Route>
+            <Route path='/bookings/current'>
+              <UserBookings />
             </Route>
 
 
