@@ -7,6 +7,7 @@ import "./reviewModal.css"
 export default function ReviewModal() {
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(0)
+
     const [errors, setErrors] = useState({})
     const dispatch = useDispatch();
     const { closeModal } = useModal();

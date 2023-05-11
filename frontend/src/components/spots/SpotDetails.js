@@ -24,7 +24,7 @@ export default function SpotDetails() {
     useEffect(() => {
         const timeout = setTimeout(() => {
             setLoading(false)
-        }, 500)
+        }, 600)
         dispatch(getSpotDetailsThunk(spotId)).then(dispatch(getReviewsThunk(spotId)))
         // .then(() => setLoading(false))
 
