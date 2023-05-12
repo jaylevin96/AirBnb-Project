@@ -13,7 +13,7 @@ export default function DeleteBookingModal({ bookingId }) {
             <h1>Confirm Cancellation</h1>
             <h3 id="confirm-delete-text">Are you sure you want to cancel this upcoming booking?</h3>
             <div id="delete-modal-buttons-container">
-                {validationErrors.message && (<p className="booking-error">Bookings can't be canceled within 24 hours of the reservation</p>)}
+                {validationErrors.message && (<p className="booking-error">Bookings can't be cancelled within 24 hours of the reservation</p>)}
                 <button id="delete" className="modal-delete-buttons"
                     onClick={() => {
                         dispatch(deleteBookingThunk(bookingId)).then(dispatch(getUserBookingsThunk())).then(closeModal).catch(async (error) => {

@@ -8,6 +8,7 @@ import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import ReviewModal from '../reviews/ReviewModal';
 import { getReviewsThunk } from '../../store/reviews';
 import BookingFormModal from '../BookingFormModal';
+import OpenModalButton from '../OpenModalButton';
 export default function SpotDetails() {
     const params = useParams();
     let { spotId } = params;
@@ -92,13 +93,18 @@ export default function SpotDetails() {
                     {!numReviews && (<span>  <i className="fa-solid fa-star" style={{ color: "#ff5a5f" }}></i>New</span>)}
                     {numReviews > 0 && (<span>{numReviews} {numReviews < 2 ? "review" : "reviews"}</span>)}
                     {/* <span>{`${numReviews ? `${numReviews} reviews` : "New"}`}</span> */}
-                    <button>
+
+                    <OpenModalButton
+                        buttonText={"Reserve"}
+                        modalComponent={<BookingFormModal spot={spot} />}
+                    />
+                    {/* <button>
 
                         <OpenModalMenuItem
                             itemText={"Reserve"}
                             modalComponent={<BookingFormModal spot={spot} />} />
 
-                    </button>
+                    </button> */}
 
 
 
@@ -133,11 +139,16 @@ export default function SpotDetails() {
 
                 </span>
 
-                <button id="post-review-button" className={hiddenClassName}>
+                <OpenModalButton
+                    buttonText={"Post Your Review"}
+                    modalComponent={<ReviewModal />}
+                />
+
+                {/* <button id="post-review-button" className={hiddenClassName}>
                     <OpenModalMenuItem itemText="Post Your Review"
                         modalComponent={<ReviewModal />} />
 
-                </button>
+                </button> */}
 
             </div>
             <div className='reviews-container'>

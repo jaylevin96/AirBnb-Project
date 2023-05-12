@@ -86,7 +86,8 @@ export default function bookingsReducer(state = initialState, action) {
         case GETUSERBOOKINGS:
             newState = Object.assign({}, state);
             newState.spot = { ...newState.spot }
-            newState.user = { ...newState.user }
+            // newState.user = { ...newState.user }
+            newState.user = {};
             action.data.Bookings.forEach(booking => {
                 newState.user[booking.id] = booking;
             })

@@ -5,6 +5,7 @@ import { getSpotDetailsThunk, getUserSpotsThunk } from '../../store/spots';
 import SpotContainer from './SpotContainer';
 import OpenModalMenuItem from '../Navigation/OpenModalMenuItem';
 import DeleteFormModal from './DeleteFormModal';
+import OpenModalButton from '../OpenModalButton';
 
 export default function ManageSpots() {
     const history = useHistory();
@@ -51,12 +52,10 @@ export default function ManageSpots() {
                                     }}
 
                                 >Update</button>
-                                <button id="manage-delete-spot">
-                                    <OpenModalMenuItem itemText="Delete"
-                                        modalComponent={<DeleteFormModal spotId={spot.id} />} />
-
-
-                                </button>
+                                <OpenModalButton
+                                    buttonText={"Delete"}
+                                    modalComponent={<DeleteFormModal spotId={spot.id} />}
+                                />
 
                             </div>
 

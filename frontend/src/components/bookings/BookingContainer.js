@@ -6,6 +6,7 @@ import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import ReviewModal from "../reviews/ReviewModal";
 import DeleteBookingModal from "./DeleteBookingModal";
 import { useHistory } from "react-router-dom"
+import OpenModalButton from "../OpenModalButton";
 
 export default function BookingContainer({ booking, future }) {
     const dispatch = useDispatch();
@@ -72,26 +73,23 @@ export default function BookingContainer({ booking, future }) {
                 {future && (<>
                     <li className="booking-dates">Reservation begins {`${months[startMonth]} ${startDay}, ${startYear}`}</li>
                     <li className="booking-dates">Ends {`${months[endMonth]} ${endDay}, ${endYear}`}</li>
-                    <button>
+                    <OpenModalButton buttonText="Cancel booking"
+                        modalComponent={<DeleteBookingModal bookingId={booking.id} />} />
+                    {/* <button>
                         <OpenModalMenuItem
                             itemText="Cancel booking"
-                            modalComponent={<DeleteBookingModal bookingId={booking.id} />}
-                        />
+                            modalComponent={/>}
+                                />
 
-                    </button>
+                    </button> */}
                 </>)}
                 {!future && (<>
                     <li className="booking-dates"> Started {`${months[startMonth]} ${startDay}, ${startYear}`}</li>
                     <li className="booking-dates">Ended {`${months[endMonth]} ${endDay}, ${endYear}`}</li>
                     {!userReviewed && (<>
-                        <button>
-                            <OpenModalMenuItem
-                                itemText="Post your Review"
-                                modalComponent={<ReviewModal spotInfo={spot} />}
-                            />
 
-                        </button>
-
+                        <OpenModalButton buttonText="Post your Review"
+                            modalComponent={<ReviewModal spotInfo={spot} />} />
                     </>)}
                 </>)}
 

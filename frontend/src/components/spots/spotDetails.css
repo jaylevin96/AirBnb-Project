@@ -132,7 +132,7 @@ h2 + span {
   box-shadow: 2px 2px 1px black;
 }
 
-#post-review-button {
+#review-summary button {
   list-style-type: none;
   background-color: rgb(77, 75, 75);
   box-shadow: 2px 2px 1px black;

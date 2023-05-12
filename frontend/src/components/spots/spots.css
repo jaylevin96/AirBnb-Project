@@ -79,8 +79,7 @@
 #manage-delete-spot {
   list-style-type: none;
 }
-#manage-delete-spot,
-#manage-update-spot {
+#manage-buttons-container button {
   margin: 0;
   width: 40%;
   height: 20px;
