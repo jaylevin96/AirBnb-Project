@@ -76,7 +76,8 @@ export default function ReviewModal({ spotInfo }) {
             </div>
             <button className={disabled ? "" : "canSubmit"}
                 onClick={() => {
-                    dispatch(postReviewsThunk(spot.id, { review, stars })).then(() => { dispatch(getSpotDetailsThunk(spot.id)) })
+                    dispatch(postReviewsThunk(spot.id, { review, stars }))
+                        .then(() => { dispatch(getSpotDetailsThunk(spot.id)) })
                         // .then(getUserBookingsThunk())
                         .then(closeModal).catch(async (res) => {
                             console.log(res);

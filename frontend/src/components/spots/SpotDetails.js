@@ -33,6 +33,10 @@ export default function SpotDetails() {
 
         return () => clearTimeout(timeout);
     }, [dispatch, spotId])
+
+    // useEffect(() => {
+    //     setLoading(false)
+    // }, [userSpotReviews])
     // let spot = spots.find((spot) => spot.id === spotId)
     // console.log("SPOT", spot);
     if (Object.values(spot).length < 2) return (<></>)

@@ -7,7 +7,7 @@ export default function SpotContainer({ spot }) {
     const history = useHistory();
     let rating = Math.round(spot.avgRating * 100) / 100;
     rating = rating.toFixed(2)
-    if (!rating) rating = "New"
+    if (!rating || rating === "0.00") rating = "New"
     return (
         <div title={spot.name} className="tile"
             onClick={() => {
