@@ -4,14 +4,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { postReviewsThunk, getReviewsThunk } from "../../store/reviews";
 import { getSpotDetailsThunk } from "../../store/spots";
 import "./reviewModal.css"
-export default function ReviewModal() {
+import { getUserBookingsThunk } from "../../store/bookings";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+export default function ReviewModal({ spotInfo }) {
+    const history = useHistory()
     const [review, setReview] = useState('');
     const [stars, setStars] = useState(0)
     const [activeStars, setActiveStars] = useState(0)
     const [errors, setErrors] = useState({})
     const dispatch = useDispatch();
     const { closeModal } = useModal();
-    const spot = useSelector((state) => state.spots.singleSpot)
+
+    let spot = useSelector((state) => state.spots.singleSpot)
+    if (spotInfo) spot = spotInfo;
+
     const disabled = stars < 1 || review.length < 10
 
 
@@ -70,15 +76,21 @@ export default function ReviewModal() {
             </div>
             <button className={disabled ? "" : "canSubmit"}
                 onClick={() => {
-                    dispatch(postReviewsThunk(spot.id, { review, stars })).then(() => { dispatch(getSpotDetailsThunk(spot.id)) }).then(closeModal).catch(async (res) => {
-                        const data = await res.json();
-                        if (data && data.serrors) {
-                            setErrors(data.errors)
-                        }
-                        if (data.message) {
-                            setErrors(data.message)
-                        }
-                    })
+                    dispatch(postReviewsThunk(spot.id, { review, stars })).then(() => { dispatch(getSpotDetailsThunk(spot.id)) })
+                        // .then(getUserBookingsThunk())
+                        .then(closeModal).catch(async (res) => {
+                            console.log(res);
+                            const data = await res.json();
+                            if (data && data.errors) {
+                                setErrors(data.errors)
+                            }
+                            if (data.message) {
+                                setErrors(data.message)
+                            }
+                        })
+                    if (spotInfo) {
+                        history.push(`/spots/${spot.id}`)
+                    }
                 }}
                 disabled={disabled}
             >Submit Your Review</button>

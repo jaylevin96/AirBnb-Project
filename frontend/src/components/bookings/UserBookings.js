@@ -13,7 +13,9 @@ export default function UserBookings() {
     let currentDate = new Date();
     let futureBookings = userBookings.filter(booking => {
         let date = new Date(booking.startDate)
-        return date > currentDate
+        console.log("STARTING DATE", date);
+        console.log("CURRENT DATE", currentDate);
+        return date >= currentDate
     })
     let pastBookings = userBookings.filter(booking => {
         let date = new Date(booking.endDate)

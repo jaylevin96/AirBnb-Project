@@ -12,7 +12,7 @@ export default function BookingContainer({ booking, future }) {
         dispatch(getAllSpots()).then(dispatch(getReviewsCurrentThunk()))
 
     }, [dispatch])
-    console.log("BOOKING", booking);
+
     let spot = booking.Spot;
     let allSpots = Object.values(useSelector((state) => state.spots.allSpots))
     // let allPreviewImages = allSpots.map(spot => spot.previewImage)
@@ -79,7 +79,7 @@ export default function BookingContainer({ booking, future }) {
                         <button>
                             <OpenModalMenuItem
                                 itemText="Post your Review"
-                                modalComponent={<ReviewModal />}
+                                modalComponent={<ReviewModal spotInfo={spot} />}
                             />
 
                         </button>
