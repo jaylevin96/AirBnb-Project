@@ -25,7 +25,7 @@ function ProfileButton({ user }) {
         if (!showMenu) return;
 
         const closeMenu = (e) => {
-            if (!ulRef.current.contains(e.target) || e.target.innerText === "Manage Spots" || e.target.innerText === "View Bookings") {
+            if (!ulRef.current.contains(e.target) || e.target.innerText === "Manage Spots" || e.target.innerText === "Your Trips") {
                 setShowMenu(false);
             }
         };
@@ -57,7 +57,7 @@ function ProfileButton({ user }) {
                         <li id="li-email">{user.email}</li>
                         <NavLink to='/spots/current' id="li-manage-spots">Manage Spots</NavLink>
                         {/* <li id="li-manage-spots"><NavLink to='/spots/current'>Manage Spots</NavLink></li> */}
-                        <NavLink to="/bookings/current" id="li-view-bookings">View Bookings</NavLink>
+                        <NavLink to="/bookings/current" id="li-view-bookings">Your Trips</NavLink>
                         <li>
                             <button id="profile-logout" onClick={logout}>Log Out</button>
                         </li>
