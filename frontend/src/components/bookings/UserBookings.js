@@ -10,11 +10,10 @@ export default function UserBookings() {
     useEffect(() => {
         dispatch(getUserBookingsThunk())
     }, [dispatch])
-    let currentDate = new Date();
+    let currentDate = new Date(new Date().setHours(0, 0, 0, 0))
     let futureBookings = userBookings.filter(booking => {
         let date = new Date(booking.startDate)
-        console.log("STARTING DATE", date);
-        console.log("CURRENT DATE", currentDate);
+        console.log(date <= currentDate);
         return date >= currentDate
     })
     let pastBookings = userBookings.filter(booking => {

@@ -20,8 +20,8 @@ export default function BookingFormModal({ spot }) {
         let errors = {};
         if (!startDate) errors.start = "Start date is required"
         if (!endDate) errors.end = "End date is required"
-        let start = new Date(startDate)
-        let end = new Date(endDate)
+        let start = new Date(startDate).setHours(0, 0, 0, 0)
+        let end = new Date(endDate).setHours(0, 0, 0, 0)
         if (end <= start) errors.end = "End date can not be on or before Start date"
         setValidationErrors(errors);
 

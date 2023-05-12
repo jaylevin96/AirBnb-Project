@@ -5,9 +5,11 @@ import { getReviewsCurrentThunk } from "../../store/reviews";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import ReviewModal from "../reviews/ReviewModal";
 import DeleteBookingModal from "./DeleteBookingModal";
+import { useHistory } from "react-router-dom"
 
 export default function BookingContainer({ booking, future }) {
     const dispatch = useDispatch();
+    const history = useHistory()
     useEffect(() => {
         dispatch(getAllSpots()).then(dispatch(getReviewsCurrentThunk()))
 
@@ -55,11 +57,17 @@ export default function BookingContainer({ booking, future }) {
 
     return <>
         {/* <BookingSpotDetail spot={spot} /> */}
-        <img src={preview}></img>
+        <img src={preview}
+            onClick={() => history.push(`/spots/${spot.id}`)}
+        ></img>
 
         <div id="booking-text-container">
-            <h3 className="booking-text">{spot.city}</h3>
-            <h4 className="booking-text">{spot.name} </h4>
+            <h3 className="booking-text"
+                onClick={() => history.push(`/spots/${spot.id}`)}>{spot.city}
+            </h3>
+            <h4 className="booking-text"
+                onClick={() => history.push(`/spots/${spot.id}`)}>{spot.name}
+            </h4>
             <ul id="booking-dates-container">
                 {future && (<>
                     <li className="booking-dates">Reservation begins {`${months[startMonth]} ${startDay}, ${startYear}`}</li>
