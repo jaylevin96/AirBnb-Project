@@ -138,11 +138,11 @@ export default function SpotDetails() {
 
 
                 </span>
-
-                <OpenModalButton
+                {!hiddenClassName.length && (<OpenModalButton
                     buttonText={"Post Your Review"}
                     modalComponent={<ReviewModal />}
-                />
+                />)}
+
 
                 {/* <button id="post-review-button" className={hiddenClassName}>
                     <OpenModalMenuItem itemText="Post Your Review"

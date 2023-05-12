@@ -12,7 +12,9 @@ export default function SpotReviews({ spotId, hidden }) {
         dispatch(getReviewsThunk(spotId))
     }, [dispatch])
     if (!spotReviews.length && !hidden.length) {
-        return <h3>Be the first to post a review!</h3>
+        return <h3
+            style={{ marginBottom: "1.5em" }}
+        >Be the first to post a review!</h3>
     }
     if (!spotReviews) return (<></>)
     return (
