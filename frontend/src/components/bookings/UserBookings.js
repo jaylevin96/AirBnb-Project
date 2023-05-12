@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { getUserBookingsThunk } from "../../store/bookings";
+import BookingContainer from "./BookingContainer";
+import "./bookings.css"
 
 export default function UserBookings() {
     const dispatch = useDispatch();
@@ -10,10 +12,12 @@ export default function UserBookings() {
     }, [dispatch])
     let currentDate = new Date();
     let futureBookings = userBookings.filter(booking => {
-        return booking.startDate > currentDate
+        let date = new Date(booking.startDate)
+        return date > currentDate
     })
     let pastBookings = userBookings.filter(booking => {
-        return booking.endDate < currentDate
+        let date = new Date(booking.endDate)
+        return date < currentDate
     })
 
 
@@ -22,12 +26,22 @@ export default function UserBookings() {
 
 
     return <>
-        <h1>My Bookings</h1>
-        <h2>Upcoming bookings</h2>
-        {futureBookings.map(booking => {
-            return <li key={booking.id}>{booking.name}</li>
-        })}
-        <h2>Past bookings</h2>
+
+        <h2>Upcoming trips</h2>
+        <div className="bookings-container">
+            {futureBookings.map(booking => {
+                return <BookingContainer booking={booking} future={true} />
+            })}
+
+        </div>
+
+        <h2>Where you've been</h2>
+        <div className="bookings-container">
+            {pastBookings.map(booking => {
+                return <BookingContainer booking={booking} future={false} />
+            })}
+        </div>
+
 
     </>
 }
