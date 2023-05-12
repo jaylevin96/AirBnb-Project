@@ -7,7 +7,7 @@ export default function DeleteBookingModal({ bookingId }) {
     const dispatch = useDispatch()
     const [validationErrors, setValidationErrors] = useState({});
 
-    console.log(validationErrors);
+
     return (
         <div>
             <h1>Confirm Cancellation</h1>
@@ -16,10 +16,13 @@ export default function DeleteBookingModal({ bookingId }) {
                 {validationErrors.message && (<p className="booking-error">Bookings can't be cancelled within 24 hours of the reservation</p>)}
                 <button id="delete" className="modal-delete-buttons"
                     onClick={() => {
-                        dispatch(deleteBookingThunk(bookingId)).then(dispatch(getUserBookingsThunk())).then(closeModal).catch(async (error) => {
-                            let errors = await error.json()
-                            setValidationErrors(errors)
-                        })
+                        dispatch(deleteBookingThunk(bookingId))
+                            // .then(dispatch(getUserBookingsThunk()))
+                            .then(closeModal).catch(async (error) => {
+                                let errors = await error.json()
+                                setValidationErrors(errors)
+                            })
+
                     }}
                 >{`Yes (Cancel Booking)`}</button>
                 <button id="keep" className="modal-delete-buttons"
