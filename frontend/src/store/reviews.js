@@ -4,6 +4,7 @@ const POSTREVIEW = '/reviews/post'
 const GETEVIEWSBYUSER = '/reviews/current'
 const DELETEREVIEW = '/reviews/delete'
 
+
 export function getReviews(data) {
     return {
         type: GETREVIEWSBYSPOT,

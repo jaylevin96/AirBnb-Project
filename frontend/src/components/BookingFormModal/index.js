@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { createBookingThunk, getSpotBookingsThunk } from "../../store/bookings";
+import { createBookingThunk, getSpotBookingsThunk, getUserBookingsThunk } from "../../store/bookings";
 import { useModal } from "../../context/Modal";
 import "./bookingModal.css"
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { getReviewsCurrentThunk } from "../../store/reviews";
 
 export default function BookingFormModal({ spot }) {
     const dispatch = useDispatch();
+    const history = useHistory();
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [validationErrors, setValidationErrors] = useState({})
@@ -26,33 +29,37 @@ export default function BookingFormModal({ spot }) {
         e.preventDefault();
 
         if (Object.values(validationErrors).length) return;
-        let res = dispatch(createBookingThunk(spot.id, { startDate, endDate })).then(closeModal).catch(async (res) => {
-            let error = await res.json()
-            error = error.errors;
-            // console.log(error);
-            let newErrors = {};
-            if (error.message = "Authentication required") {
-                newErrors.message = "You must be logged in to request a booking"
-            }
-            if (error && error.endDate) {
-                newErrors.end = error.endDate;
+        let res = dispatch(createBookingThunk(spot.id, { startDate, endDate })).then(dispatch(getUserBookingsThunk())).then(closeModal)
+            .then(() => history.push('/bookings/current'))
+            .catch(async (res) => {
+                console.log(res);
+                let error = await res.json()
+                error = error.errors;
+                // console.log(error);
+                let newErrors = {};
+                if (error && error.message === "Authentication required") {
+                    newErrors.message = "You must be logged in to request a booking"
+                }
+                if (error && error.endDate) {
+                    newErrors.end = error.endDate;
 
-            }
-            if (error && error.startDate) {
+                }
+                if (error && error.startDate) {
 
-                newErrors.start = error.startDate;
-            }
-            if (!error) {
+                    newErrors.start = error.startDate;
+                }
+                if (!error) {
 
-                newErrors.message = "Sorry, you can not book a reservation for your own listing."
-            }
-            setValidationErrors(newErrors);
-        })
+                    newErrors.message = "Sorry, you can not book a reservation for your own listing."
+                }
+                setValidationErrors(newErrors);
+                return
+            })
 
 
 
     }
-    console.log(validationErrors);
+
 
     return <>
         <h2 id="booking-header">Let's get started with your reservation</h2>
@@ -69,7 +76,7 @@ export default function BookingFormModal({ spot }) {
             <input type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}></input>
-            {hasSubmitted && validationErrors.end && (<p className="booking-error">{"End date cannot be on or before the start date"}</p>)}
+            {hasSubmitted && validationErrors.end && (<p className="booking-error">{validationErrors.end}</p>)}
             <button type="submit">Request booking</button>
         </form>
 

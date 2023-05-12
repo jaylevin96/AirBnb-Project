@@ -3,6 +3,7 @@ import { csrfFetch } from "./csrf"
 const GETBOOKINGS = '/spot/bookings'
 const CREATEBOOKING = '/spot/booking/new'
 const GETUSERBOOKINGS = '/booking/current'
+const DELETEBOOKING = '/booking/delete'
 
 export function getBookings(data, id) {
     return {
@@ -21,6 +22,12 @@ export function createBooking(data, id) {
     return {
         type: CREATEBOOKING,
         data,
+        id
+    }
+}
+export function deleteBooking(id) {
+    return {
+        type: DELETEBOOKING,
         id
     }
 }
@@ -55,6 +62,13 @@ export const createBookingThunk = (id, body) => async dispatch => {
     }
 
 }
+export const deleteBookingThunk = (id) => async dispatch => {
+    const response = await csrfFetch(`/api/bookings/${id}`, {
+        method: "DELETE",
+    })
+    const data = await response.json();
+    dispatch(deleteBooking(id))
+}
 
 const initialState = { user: {}, spot: {} }
 
@@ -83,9 +97,17 @@ export default function bookingsReducer(state = initialState, action) {
             newState = Object.assign({}, state);
             newState.spot = { ...newState.spot }
             newState.user = { ...newState.user }
-            newState.spot[action.id] = action.data
+            newState.spot[action.data.id] = action.data
+            newState.user[action.data.id] = action.data
             return newState;
 
+        case DELETEBOOKING:
+            newState = Object.assign({}, state);
+            newState.spot = { ...newState.spot }
+            newState.user = { ...newState.user }
+            delete newState.user[action.id]
+            delete newState.spot[action.id]
+            return newState;
 
         default:
             return state;

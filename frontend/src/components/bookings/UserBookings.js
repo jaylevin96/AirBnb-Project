@@ -23,6 +23,8 @@ export default function UserBookings() {
 
     if (!userBookings.length) return <></>
 
+    console.log(futureBookings);
+
 
 
     return <>
@@ -30,7 +32,11 @@ export default function UserBookings() {
         <h2>Upcoming trips</h2>
         <div className="bookings-container">
             {futureBookings.map(booking => {
-                return <BookingContainer booking={booking} future={true} />
+                return (<div key={booking.id} className="booking-tile">
+                    <BookingContainer booking={booking} future={true} />
+
+                </div>)
+
             })}
 
         </div>
@@ -38,7 +44,10 @@ export default function UserBookings() {
         <h2>Where you've been</h2>
         <div className="bookings-container">
             {pastBookings.map(booking => {
-                return <BookingContainer booking={booking} future={false} />
+                return (<div key={booking.id} className="booking-tile">
+                    <BookingContainer booking={booking} future={false} />
+
+                </div>)
             })}
         </div>
 

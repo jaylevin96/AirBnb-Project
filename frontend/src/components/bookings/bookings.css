@@ -47,3 +47,12 @@
 .booking-dates {
   list-style-type: none;
 }
+
+#booking-dates-container button {
+  list-style-type: none;
+  background-color: rgb(77, 75, 75);
+  box-shadow: 2px 2px 1px black;
+  color: white;
+  font-weight: 600;
+  margin-top: 1em;
+}

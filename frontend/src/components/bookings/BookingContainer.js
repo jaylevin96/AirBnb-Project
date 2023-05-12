@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { getReviewsCurrentThunk } from "../../store/reviews";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import ReviewModal from "../reviews/ReviewModal";
+import DeleteBookingModal from "./DeleteBookingModal";
 
 export default function BookingContainer({ booking, future }) {
     const dispatch = useDispatch();
@@ -11,6 +12,7 @@ export default function BookingContainer({ booking, future }) {
         dispatch(getAllSpots()).then(dispatch(getReviewsCurrentThunk()))
 
     }, [dispatch])
+    console.log("BOOKING", booking);
     let spot = booking.Spot;
     let allSpots = Object.values(useSelector((state) => state.spots.allSpots))
     // let allPreviewImages = allSpots.map(spot => spot.previewImage)
@@ -21,11 +23,12 @@ export default function BookingContainer({ booking, future }) {
     let startDate = booking.startDate
     let endDate = booking.endDate
     let user = useSelector((state) => state.session.user)
-    let userSpotReview = Object.values(useSelector((state) => state.reviews.spot))
+    let userSpotReview = Object.values(useSelector((state) => state.reviews.user))
     if (user) {
         userSpotReview = userSpotReview.filter((review) => review.userId === user.id && review.spotId === booking.spotId)
     }
     let userReviewed = userSpotReview.length;
+
 
     let startMonth = startDate.slice(5, 7)
     let endMonth = endDate.slice(5, 7)
@@ -48,7 +51,9 @@ export default function BookingContainer({ booking, future }) {
         "12": "December"
     }
 
-    return <div key={booking.id} className="booking-tile">
+    if (!spot) return <></>
+
+    return <>
         {/* <BookingSpotDetail spot={spot} /> */}
         <img src={preview}></img>
 
@@ -59,7 +64,13 @@ export default function BookingContainer({ booking, future }) {
                 {future && (<>
                     <li className="booking-dates">Reservation begins {`${months[startMonth]} ${startDay}, ${startYear}`}</li>
                     <li className="booking-dates">Ends {`${months[endMonth]} ${endDay}, ${endYear}`}</li>
+                    <button>
+                        <OpenModalMenuItem
+                            itemText="Cancel booking"
+                            modalComponent={<DeleteBookingModal bookingId={booking.id} />}
+                        />
 
+                    </button>
                 </>)}
                 {!future && (<>
                     <li className="booking-dates"> Started {`${months[startMonth]} ${startDay}, ${startYear}`}</li>
@@ -78,5 +89,5 @@ export default function BookingContainer({ booking, future }) {
 
             </ul>
         </div>
-    </div>
+    </>
 }
