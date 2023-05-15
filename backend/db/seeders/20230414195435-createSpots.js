@@ -76,7 +76,7 @@ module.exports = {
         lat: 33.88,
         lng: -115.90,
         name: 'Private Room in Elegant French Gothic Home',
-        description: `This elegant converted 1925 church rectory in French Gothic style features original stained-glass windows, and one charming guestroom + bath with claw foot tub/shower, chandelier, A/C, and shared kitchen. Enjoy a sunny morning coffee in the garden, a glass of wine, or read by the fire in the living room on chilly nights. `,
+        description: `This elegant converted 1925 church rectory in French Gothic style features original stained-glass windows, and one charming guestroom + bath with claw foot tub/shower, chandelier, A/C, and shared kitchen.  `,
         price: 125
       },
       {
@@ -88,7 +88,7 @@ module.exports = {
         lat: 39.88,
         lng: -105.90,
         name: 'Antebellum, Romantic Rococo bedroom',
-        description: `Historic Greek Revival,  near the edge of the French Quarter. This beautiful home is dressed out in period style, ornamental plaster, marble fireplaces and antique furnishings. The crowning glory of this property is a gorgeous courtyard.  Lush and private with fountains, ornamental fish pound and hot tub and beautiful gardens.`,
+        description: `Historic Greek Revival,  near the edge of the French Quarter. This beautiful home is dressed out in period style, ornamental plaster, marble fireplaces and antique furnishings. The crowning glory of this property is a gorgeous courtyard.`,
         price: 190
       },
       {
@@ -112,7 +112,7 @@ module.exports = {
         lat: 39.88,
         lng: -105.90,
         name: 'Embrace Tiny Living in a Magical, Bespoke Little Home',
-        description: `Warm and inviting, this custom-built 'Tiny One' house offers every home comfort despite its diminutive dimensions. Ingenious design and a thoughtfully considered layout maximizes the space, complete with a snuggly bedroom nook and full-size bathroom.`,
+        description: `This custom-built 'Tiny One' house offers every home comfort despite its diminutive dimensions. Ingenious design and a thoughtfully considered layout maximizes the space, complete with a snuggly bedroom nook and full-size bathroom.`,
         price: 107
       },
 
