@@ -100,7 +100,7 @@ module.exports = {
         lat: 39.88,
         lng: -105.90,
         name: 'Hensley House Private Master room/Bar',
-        description: `Welcome to the Hensley House of San Jose.  It gained historical landmark distinction in 1990.  It was the former home of San Jose Mayor Samuel Hensley who was responsible for developing San Jose from a small settlement to a large city in the Mid 1860’s.  This house was originally built in 1894 and still retains it’s old world charms, but updated with modern amenities for your comfort.`,
+        description: `Welcome to the Hensley House of San Jose. This house was originally built in 1894 and still retains it’s old world charms, but updated with modern amenities for your comfort.`,
         price: 93
       },
       {
