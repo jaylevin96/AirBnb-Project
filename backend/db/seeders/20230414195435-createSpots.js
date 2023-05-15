@@ -68,7 +68,7 @@ module.exports = {
         price: 249
       },
       {
-        ownerId: 1,
+        ownerId: 3,
         address: '1458 Frank Sinatra Ave',
         city: 'Los Angeles',
         state: 'California',
@@ -111,7 +111,7 @@ module.exports = {
         country: 'United States',
         lat: 39.88,
         lng: -105.90,
-        name: 'Embrace Tiny Living in a Magical, Bespoke Little Home',
+        name: 'Embrace Tiny Living in a Magical Little Home',
         description: `This custom-built 'Tiny One' house offers every home comfort despite its diminutive dimensions. Ingenious design and a thoughtfully considered layout maximizes the space, complete with a snuggly bedroom nook and full-size bathroom.`,
         price: 107
       },
