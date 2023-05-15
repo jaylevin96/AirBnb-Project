@@ -67,6 +67,54 @@ module.exports = {
         description: `Zebra Shadow, Joshua Tree`,
         price: 249
       },
+      {
+        ownerId: 1,
+        address: '1458 Frank Sinatra Ave',
+        city: 'Los Angeles',
+        state: 'California',
+        country: 'United States',
+        lat: 33.88,
+        lng: -115.90,
+        name: 'Private Room in Elegant French Gothic Home',
+        description: `This elegant converted 1925 church rectory in French Gothic style features original stained-glass windows, and one charming guestroom + bath with claw foot tub/shower, chandelier, A/C, and shared kitchen. Enjoy a sunny morning coffee in the garden, a glass of wine, or read by the fire in the living room on chilly nights. `,
+        price: 125
+      },
+      {
+        ownerId: 2,
+        address: '1307 Central Ave',
+        city: 'New Orleans',
+        state: 'Louisiana',
+        country: 'United States',
+        lat: 39.88,
+        lng: -105.90,
+        name: 'Antebellum, ROmantic Rococo bedroom',
+        description: `Historic Greek Revival,  near the edge of the French Quarter. This beautiful home is dressed out in period style, ornamental plaster, marble fireplaces and antique furnishings. The crowning glory of this property is a gorgeous courtyard.  Lush and private with fountains, ornamental fish pound and hot tub and beautiful gardens.`,
+        price: 190
+      },
+      {
+        ownerId: 1,
+        address: '1329 Second Ave',
+        city: 'San Jose',
+        state: 'California',
+        country: 'United States',
+        lat: 39.88,
+        lng: -105.90,
+        name: 'Hensley House Private Master room/Bar',
+        description: `Welcome to the Hensley House of San Jose.  It gained historical landmark distinction in 1990.  It was the former home of San Jose Mayor Samuel Hensley who was responsible for developing San Jose from a small settlement to a large city in the Mid 1860’s.  This house was originally built in 1894 and still retains it’s old world charms, but updated with modern amenities for your comfort.`,
+        price: 93
+      },
+      {
+        ownerId: 2,
+        address: '1749 First Street',
+        city: 'Charlotte',
+        state: 'North Carolina',
+        country: 'United States',
+        lat: 39.88,
+        lng: -105.90,
+        name: 'Embrace Tiny Living in a Magical, Bespoke Little Home',
+        description: `Warm and inviting, this custom-built 'Tiny One' house offers every home comfort despite its diminutive dimensions. Ingenious design and a thoughtfully considered layout maximizes the space, complete with a snuggly bedroom nook and full-size bathroom.`,
+        price: 107
+      },
 
     ])
 
@@ -82,7 +130,7 @@ module.exports = {
     const Op = Sequelize.Op;
     await queryInterface.bulkDelete(options, {
       id: {
-        [Op.in]: [1, 2, 3, 4]
+        [Op.in]: [1, 2, 3, 4, 5, 6, 7, 8]
       }
     })
   }
