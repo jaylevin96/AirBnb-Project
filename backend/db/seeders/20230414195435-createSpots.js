@@ -87,7 +87,7 @@ module.exports = {
         country: 'United States',
         lat: 39.88,
         lng: -105.90,
-        name: 'Antebellum, ROmantic Rococo bedroom',
+        name: 'Antebellum, Romantic Rococo bedroom',
         description: `Historic Greek Revival,  near the edge of the French Quarter. This beautiful home is dressed out in period style, ornamental plaster, marble fireplaces and antique furnishings. The crowning glory of this property is a gorgeous courtyard.  Lush and private with fountains, ornamental fish pound and hot tub and beautiful gardens.`,
         price: 190
       },
@@ -106,8 +106,8 @@ module.exports = {
       {
         ownerId: 2,
         address: '1749 First Street',
-        city: 'Charlotte',
-        state: 'North Carolina',
+        city: 'Atlanta',
+        state: 'Georgia',
         country: 'United States',
         lat: 39.88,
         lng: -105.90,

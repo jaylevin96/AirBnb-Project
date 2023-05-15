@@ -40,7 +40,31 @@ module.exports = {
         userId: '3',
         review: 'Would never stay here again! The place was infested with bugs and there was no AC!',
         stars: 1
-      }
+      },
+      {
+        spotId: '5',
+        userId: '2',
+        review: 'Could not imagine a more perfect place for LA',
+        stars: 5
+      },
+      {
+        spotId: '5',
+        userId: '3',
+        review: 'Little small but very clean',
+        stars: 4
+      },
+      {
+        spotId: '6',
+        userId: '1',
+        review: 'Would recommend this spot to anyone visiting NOLA!',
+        stars: 5
+      },
+      {
+        spotId: '7',
+        userId: '2',
+        review: 'Pretty decent. A bit small but the host is very friendly.',
+        stars: 3
+      },
     ])
   },
 
