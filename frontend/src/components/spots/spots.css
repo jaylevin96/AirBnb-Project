@@ -48,6 +48,8 @@
   width: 225px;
   height: auto;
   border-radius: 10px;
+  max-height: 150px;
+  object-fit: cover;
   /* border-top-right-radius: 10px; */
   /* border-top-left-radius: 10px; */
 }
